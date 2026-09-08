@@ -1,0 +1,213 @@
+/* ============================================
+   Auth Theme — "Ledger" style (Compact Box + Password Rules)
+   Include this AFTER signup.css on every auth page
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --paper: #FAF6EC;
+    --rule: #E3DBC8;
+    --ink: #1A1712;
+    --ink-soft: #8A8171;
+    --accent: #1A1712;
+    --accent-deep: #000000;
+    --error: #A63A2E;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+}
+
+/* Proper visible box design */
+.form {
+    background: #FFFFFF !important; 
+    width: 100%;
+    max-width: 320px !important; 
+    padding: 30px 25px !important; 
+    border: 1px solid var(--rule) !important; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; 
+    border-radius: 8px !important; 
+}
+
+/* Heading top line aur gap remove kiya taaki box clean dikhe */
+.form.signup_form h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px 0;
+    padding-top: 0 !important; 
+    border-top: none !important; 
+    color: var(--ink);
+}
+
+/* Subtitle gap compact kiya */
+.form .subtitle {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 16px 0 !important; 
+}
+
+/* Inputs ke beech ki spacing compact ki */
+.input_box {
+    position: relative;
+    margin-top: 0 !important;
+    margin-bottom: 15px !important; 
+    height: auto !important;
+}
+
+.input_box label {
+    display: block;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 4px !important; 
+    text-align: left;
+}
+
+/* Input ki height compact ki */
+.input_box input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 30px 6px 2px !important; 
+    border: none;
+    border-bottom: 1.5px solid var(--rule) !important;
+    border-radius: 0;
+    background: transparent;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.input_box input:focus {
+    border-bottom: 1.5px solid var(--accent) !important;
+}
+
+.input_box input::placeholder {
+    color: #A79F8C;
+}
+
+/* Eye Icon Position Fix (ab top se align hoga taaki rules text ko disturb na kare) */
+.input_box .toggle-password {
+    display: block !important; 
+    position: absolute;
+    right: 2px;
+    top: 25px; 
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-size: 15px;
+}
+
+.input_box .toggle-password:hover {
+    color: var(--accent);
+}
+
+.input_box.error-email input,
+.input_box.error-password-confirm input {
+    border-bottom-color: var(--error) !important;
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 12.5px;
+    margin-top: 6px;
+    text-align: left;
+}
+
+/* ==========================================
+   NAYA CODE: Password Validation Rules CSS
+   ========================================== */
+.password-rules {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 10.5px;
+    font-weight: 500;
+}
+
+.password-rules span.invalid {
+    color: var(--error); /* Red color fail hone par */
+    transition: color 0.3s ease;
+}
+
+.password-rules span.valid {
+    color: #2e7d32; /* Green color pass hone par */
+    transition: color 0.3s ease;
+}
+/* ========================================== */
+
+/* Button ki height compact ki */
+.button {
+    width: 100%;
+    padding: 10px !important; 
+    margin-top: 10px; /* Thoda gap add kiya */
+    border: none;
+    border-radius: 4px !important;
+    background: var(--ink);
+    color: #FFFFFF; 
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.button:hover {
+    background: var(--accent-deep);
+}
+
+.forgot_pw {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Bottom text gap compact kiya */
+.login_signup {
+    margin-top: 18px !important; 
+    padding-top: 12px !important; 
+    border-top: 1px solid var(--rule);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+}
+
+.login_signup a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+}
+
+.login_signup a:hover {
+    text-decoration-color: var(--accent);
+}
+
+.flash-message {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 13.5px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border-left: 2px solid var(--ink-soft);
+}
+
+.flash-message.success {
+    color: var(--accent-deep);
+    border-left-color: var(--accent);
+}
+
+.flash-message.error {
+    color: var(--error);
+    border-left-color: var(--error);
+}
