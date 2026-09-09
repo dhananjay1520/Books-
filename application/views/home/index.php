@@ -1,8 +1,5 @@
-<!--
-    Home page view.
-    Controller (Home.php) ye data bhejta hai: $products, $user_id, $cartCount, $loggedIn, $name.
-    Yahan koi session_start(), PDO query, ya DB call NAHI hai — sab controller/model me hai.
--->
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BookSpot - Home</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
