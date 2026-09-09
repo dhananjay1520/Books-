@@ -1,0 +1,41 @@
+/* General Body Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #eee;
+    font-size: 14px;
+    color: #000;
+}
+
+/* Line Separator */
+.line-separator {
+    border-bottom: 1px solid #ddd; 
+    margin: 20px 0; 
+}
+
+
+/* View More Button Container */
+.view-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* View More Button Styles */
+.btn-view-more {
+    background-color: white; 
+    color: #36454F; 
+    border: 2px solid #36454F; 
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect for View More */
+.btn-view-more:hover {
+    background-color: black; 
+    color: white; 
+}

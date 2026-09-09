@@ -15,7 +15,7 @@ class Auth extends CI_Controller {
     // ---------------------------------------------------------
     public function login() {
         if ($this->session->userdata('logged_in')) {
-            redirect('dashboard');
+            redirect('home');
         }
         $this->load->view('auth/login');
     }
@@ -37,10 +37,11 @@ class Auth extends CI_Controller {
                     'user_id'   => $user->id,
                     'name'      => $user->name,
                     'email'     => $user->email,
-                    'logged_in' => TRUE
+                    'logged_in' => TRUE,
+                    'login'     => TRUE
                 );
                 $this->session->set_userdata($userdata);
-                redirect('dashboard');
+                redirect('home');
             } else {
                 $this->session->set_flashdata('error', 'Incorrect email or password.');
                 redirect('auth/login');
@@ -53,7 +54,7 @@ class Auth extends CI_Controller {
     // ---------------------------------------------------------
     public function signup() {
         if ($this->session->userdata('logged_in')) {
-            redirect('dashboard');
+            redirect('home');
         }
 
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
@@ -90,13 +91,11 @@ class Auth extends CI_Controller {
 
     // ---------------------------------------------------------
     // 3. FORGOT PASSWORD
-    // Direct flow: user enters their email + a new password on
-    // the same page. No reset link, no email is sent.
-    //
-    // NOTE: skipping the link/email verification step means
-    // anyone who knows a registered email address can change
-    // that account's password. Fine for an internal/dev tool,
-    // but worth knowing if this goes out to real users.
+    // NOTE: direct flow — email + new password same page, koi
+    // reset link / email verification nahi hai. Dev/internal
+    // tool ke liye theek hai, real users ke liye risky hai
+    // kyunki koi bhi registered email jaan kar password badal
+    // sakta hai.
     // ---------------------------------------------------------
     public function forgot_password() {
         $this->load->view('auth/forgot_password');
@@ -127,12 +126,13 @@ class Auth extends CI_Controller {
     }
 
     // ---------------------------------------------------------
-    // 4. LOGOUT — removed for now, per request.
-    // To bring it back later, add a method like:
-    //
-    // public function logout() {
-    //     $this->session->sess_destroy();
-    //     redirect('auth/login');
-    // }
+    // 4. LOGOUT
+    // logout.php standalone file ki jagah, ab yahan controller
+    // method hai — pehle session_unset()+session_destroy() tha,
+    // ab CI ka session library isi kaam ko karta hai.
     // ---------------------------------------------------------
+    public function logout() {
+        $this->session->sess_destroy();
+        redirect('auth/login');
+    }
 }

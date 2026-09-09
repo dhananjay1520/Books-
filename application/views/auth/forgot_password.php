@@ -30,11 +30,9 @@
 
         <div class="input_box">
             <label for="password">New password</label>
-            <!-- Added onkeyup to trigger rule check -->
             <input type="password" placeholder="At least 8 characters" name="password" id="password" required onkeyup="checkPasswordRules(); checkPasswordMatch();">
             <i class="uil uil-eye-slash toggle-password" data-target="password"></i>
-            
-            <!-- Password Rules Display -->
+
             <div id="password-rules" class="password-rules">
                 <span id="rule-length" class="invalid">✗ 8 chars</span>
                 <span id="rule-capital" class="invalid">✗ 1 Uppercase</span>
@@ -42,14 +40,11 @@
             </div>
         </div>
 
-        <!-- Added id="confirm-box" -->
         <div class="input_box" id="confirm-box">
             <label for="cpassword">Confirm new password</label>
-            <!-- Added onkeyup to trigger match check -->
             <input type="password" placeholder="Re-enter new password" name="cpassword" id="cpassword" required onkeyup="checkPasswordMatch()">
             <i class="uil uil-eye-slash toggle-password" data-target="cpassword"></i>
-            
-            <!-- Live JS Client-side error (Hidden by default) -->
+
             <div id="password-match-error" class="error-message" style="display: none;">Passwords do not match</div>
         </div>
 
@@ -63,17 +58,14 @@
 
 <script src="<?= base_url('assets/js/auth-theme.js'); ?>"></script>
 
-<!-- Live Validation Scripts -->
 <script>
-// 1. Check Password Rules (8 chars, Uppercase, Special)
 function checkPasswordRules() {
     var pw = document.getElementById("password").value;
-    
+
     var lengthRule = document.getElementById("rule-length");
     var capitalRule = document.getElementById("rule-capital");
     var specialRule = document.getElementById("rule-special");
 
-    // Length check (8 characters)
     if (pw.length >= 8) {
         lengthRule.className = "valid";
         lengthRule.innerHTML = "✓ 8 chars";
@@ -82,7 +74,6 @@ function checkPasswordRules() {
         lengthRule.innerHTML = "✗ 8 chars";
     }
 
-    // Uppercase check
     if (/[A-Z]/.test(pw)) {
         capitalRule.className = "valid";
         capitalRule.innerHTML = "✓ 1 Uppercase";
@@ -91,7 +82,6 @@ function checkPasswordRules() {
         capitalRule.innerHTML = "✗ 1 Uppercase";
     }
 
-    // Special Character check
     if (/[!@#$%^&*(),.?":{}|<>]/.test(pw)) {
         specialRule.className = "valid";
         specialRule.innerHTML = "✓ 1 Special Char";
@@ -101,7 +91,6 @@ function checkPasswordRules() {
     }
 }
 
-// 2. Check if Passwords Match
 function checkPasswordMatch() {
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("cpassword").value;
@@ -109,11 +98,11 @@ function checkPasswordMatch() {
     var confirmBox = document.getElementById("confirm-box");
 
     if (password !== confirmPassword && confirmPassword !== "") {
-        errorMsg.style.display = "block"; 
-        confirmBox.classList.add("error-password-confirm"); 
+        errorMsg.style.display = "block";
+        confirmBox.classList.add("error-password-confirm");
     } else {
         errorMsg.style.display = "none";
-        confirmBox.classList.remove("error-password-confirm"); 
+        confirmBox.classList.remove("error-password-confirm");
     }
 }
 </script>

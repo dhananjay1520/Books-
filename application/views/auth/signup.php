@@ -39,19 +39,15 @@
         </div>
     </div>
 
-    <!-- Added id="confirm-box" for targeting the red border via JS -->
     <div class="input_box <?= !empty($signuppassworderror) ? 'error-password-confirm' : ''; ?>" id="confirm-box">
         <label for="cpassword">Confirm password</label>
-        <!-- Added onkeyup="checkPasswordMatch()" -->
         <input type="password" placeholder="Re-enter your password" name="cpassword" id="cpassword" required onkeyup="checkPasswordMatch()">
         <i class="uil uil-eye-slash toggle-password" data-target="cpassword"></i>
-        
-        <!-- PHP Server-side error -->
+
         <?php if (!empty($signuppassworderror)): ?>
             <div class="error-message">Passwords don't match</div>
         <?php endif; ?>
-        
-        <!-- Live JS Client-side error (Hidden by default) -->
+
         <div id="password-match-error" class="error-message" style="display: none;">Passwords do not match</div>
     </div>
 
@@ -61,8 +57,6 @@
         Already have an account? <a href="<?= site_url('auth/login'); ?>">Login</a>
     </div>
 </form>
-
-
 </div>
 
 <script src="<?= base_url('assets/js/auth-theme.js'); ?>"></script>
@@ -74,12 +68,11 @@ function checkPasswordMatch() {
     var confirmBox = document.getElementById("confirm-box");
 
     if (password !== confirmPassword && confirmPassword !== "") {
-        // Triggers the styles already set up in auth-theme.css
-        errorMsg.style.display = "block"; 
-        confirmBox.classList.add("error-password-confirm"); 
+        errorMsg.style.display = "block";
+        confirmBox.classList.add("error-password-confirm");
     } else {
         errorMsg.style.display = "none";
-        confirmBox.classList.remove("error-password-confirm"); 
+        confirmBox.classList.remove("error-password-confirm");
     }
 }
 </script>
