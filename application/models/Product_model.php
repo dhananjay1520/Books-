@@ -85,6 +85,18 @@ class Product_model extends CI_Model {
         return $query->result_array();
     }
 
+    // Category filter dropdown ke liye: DB mein jitni distinct categories
+    // hain wo hi return karo (hardcoded list ki jagah)
+    public function get_distinct_categories() {
+        $this->db->select('pr_cate');
+        $this->db->distinct();
+        $this->db->where('pr_cate IS NOT NULL');
+        $this->db->where('pr_cate !=', '');
+        $this->db->order_by('pr_cate', 'ASC');
+        $query = $this->db->get('products');
+        return $query->result_array();
+    }
+
     // product_details.php me: single product lookup by id
     public function get_product_by_id($id) {
         $this->db->where('id', $id);
