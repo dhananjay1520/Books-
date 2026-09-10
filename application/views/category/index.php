@@ -24,7 +24,7 @@
         <?php foreach ($products as $product): ?>
             <div class="product-card" data-id="<?php echo htmlspecialchars($product['id']); ?>">
                 <a href="<?= site_url('product/details/' . $product['id']); ?>" class="product-link">
-                    <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
+                    <img src="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
                     <div class="product-info">
                         <div class="product-name"><?php echo htmlspecialchars($product['pr_name']); ?></div>
                         <div class="product-author">by <?php echo htmlspecialchars($product['pr_author_name']); ?></div>
@@ -47,7 +47,7 @@
                         <form class="add-to-cart-form" data-id="<?php echo htmlspecialchars($product['id']); ?>" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                             <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['pr_name']); ?>">
-                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars($product['image']); ?>">
+                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>">
                             <input type="hidden" name="product_price" value="<?php echo htmlspecialchars($product['pr_price']); ?>">
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit" class="btn-add">

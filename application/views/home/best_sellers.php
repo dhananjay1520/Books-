@@ -33,32 +33,32 @@
     }
 
     .best-seller-section .main-content {
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
         align-items: stretch;
-        gap: 25px;
+        gap: 22px;
         padding: 0 40px;
-        flex-wrap: wrap;
-        max-width: 1200px;
+        max-width: 1300px;
         margin: 0 auto;
     }
 
     .best-seller-section .product-card {
         background-color: #ffffff;
-        border-radius: 12px;
+        border-radius: 14px;
         border: 1px solid #f0f0f0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        width: 220px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        width: 100%;
         padding: 15px;
         position: relative;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
         transition: all 0.3s ease;
     }
 
     .best-seller-section .product-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
         border-color: #e8e8e8;
     }
 
@@ -83,9 +83,9 @@
     .best-seller-section .product-image-wrapper {
         position: relative;
         width: 100%;
-        height: 240px;
+        aspect-ratio: 3 / 4;
         margin-bottom: 15px;
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
         background-color: #f4f4f4;
     }
@@ -94,6 +94,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         transition: transform 0.5s ease;
     }
 
@@ -148,15 +149,17 @@
     .best-seller-section .btn-add:active { transform: scale(0.97); }
     .best-seller-section .btn-add:disabled { background: #e0e0e0; color: #888; cursor: not-allowed; box-shadow: none; }
 
+    @media (max-width: 1150px) {
+        .best-seller-section .main-content { grid-template-columns: repeat(4, 1fr); }
+    }
     @media (max-width: 900px) {
-        .best-seller-section .main-content { gap: 15px; padding: 0 20px; }
-        .best-seller-section .product-card { width: calc(33.333% - 15px); }
+        .best-seller-section .main-content { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 20px; }
     }
-    @media (max-width: 768px) {
-        .best-seller-section .product-card { width: calc(50% - 15px); }
+    @media (max-width: 640px) {
+        .best-seller-section .main-content { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 480px) {
-        .best-seller-section .product-card { width: 100%; max-width: 280px; margin: 0 auto; }
+    @media (max-width: 420px) {
+        .best-seller-section .main-content { grid-template-columns: 1fr; max-width: 280px; }
     }
 </style>
 
@@ -169,7 +172,8 @@
 
                 <a href="<?= site_url('product/details/' . $product['id']); ?>" class="product-link">
                     <div class="product-image-wrapper">
-                        <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
+                        <img src="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image" loading="lazy"
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x600/f4f4f4/999999?text=No+Image';">
                     </div>
 
                     <div class="product-info">
@@ -197,7 +201,7 @@
                         <form class="add-to-cart-form" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                             <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['pr_name']); ?>">
-                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars($product['image']); ?>">
+                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>">
                             <input type="hidden" name="product_price" value="<?php echo htmlspecialchars($product['pr_price']); ?>">
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit" class="btn-add">

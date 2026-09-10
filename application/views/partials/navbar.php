@@ -1,8 +1,6 @@
-<!--
-    Navbar partial.
-    Controller (Home.php / Product.php) $data array bhejta hai:
-    $loggedIn, $name, $cartCount — is view me koi session/DB call nahi hai.
--->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
     :root {
         --bg-color: #f8f9fa;
@@ -74,6 +72,9 @@
         border: none;
         cursor: pointer;
         transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .icons a:hover, .dropbtn:hover { color: #d1f2fb; }
 
@@ -89,6 +90,16 @@
         padding: 2px 6px;
         border-radius: 20px;
         border: 2px solid var(--top-nav-bg);
+    }
+
+    /* Naya CSS class profile image ke liye */
+    .nav-profile-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--top-nav-text);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .dropdown { position: relative; display: inline-block; }
@@ -198,7 +209,17 @@
 
                 <div class="dropdown">
                     <button onclick="toggleUserMenu()" class="dropbtn" aria-label="User Menu">
-                        <i class="fa-solid fa-circle-user"></i>
+                        <?php
+                            // Logged-in user ki uploaded image; agar nahi hai to naam se
+                            // generate hui ek circle avatar dikhao (icon nahi)
+                            $nav_user_image = $this->session->userdata('image');
+                            $nav_user_name  = !empty($loggedIn) ? $this->session->userdata('name') : 'Guest';
+
+                            $nav_avatar_src = (!empty($loggedIn) && !empty($nav_user_image))
+                                ? base_url('uploads/profile/' . htmlspecialchars($nav_user_image))
+                                : 'https://ui-avatars.com/api/?name=' . urlencode($nav_user_name) . '&background=ffffff&color=0085a6&size=64&bold=true';
+                        ?>
+                        <img src="<?= $nav_avatar_src ?>" alt="Profile" class="nav-profile-img">
                     </button>
 
                     <div id="userDropdown" class="dropdown-content">
@@ -222,8 +243,8 @@
             <a href="<?= site_url('home'); ?>">Home</a>
             <a href="<?= site_url('category'); ?>">Category</a>
             <a href="<?= site_url('myebook'); ?>">Ebook</a>
-            <a href="<?= site_url('about'); ?>">About Us</a>
-            <a href="<?= site_url('contact'); ?>">Contact</a>
+            <a href="<?= site_url('home'); ?>#about">About Us</a>
+            <a href="<?= site_url('home'); ?>#contact">Contact</a>
         </div>
     </nav>
 </header>

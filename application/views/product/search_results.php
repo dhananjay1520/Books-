@@ -6,6 +6,7 @@
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Search Results</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
 <style>
 p.p {
@@ -29,7 +30,7 @@ p.p {
                 <?php foreach ($products as $product): ?>
                     <div class="product-card" data-id="<?php echo htmlspecialchars($product['id']); ?>">
                         <a href="<?= site_url('product/details/' . $product['id']); ?>" class="product-link">
-                            <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
+                            <img src="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
                             <div class="product-info">
                                 <div class="product-name"><?php echo htmlspecialchars($product['pr_name']); ?></div>
                                 <div class="product-author">by <?php echo htmlspecialchars($product['pr_author_name']); ?></div>
@@ -52,7 +53,7 @@ p.p {
                                 <form class="add-to-cart-form" data-id="<?php echo htmlspecialchars($product['id']); ?>" method="POST">
                                     <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                                     <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['pr_name']); ?>">
-                                    <input type="hidden" name="product_image" value="<?php echo htmlspecialchars($product['image']); ?>">
+                                    <input type="hidden" name="product_image" value="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>">
                                     <input type="hidden" name="product_price" value="<?php echo htmlspecialchars($product['pr_price']); ?>">
                                     <input type="hidden" name="quantity" value="1">
                                     <button type="submit" class="btn-add">

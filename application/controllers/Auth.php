@@ -37,6 +37,7 @@ class Auth extends CI_Controller {
                     'user_id'   => $user->id,
                     'name'      => $user->name,
                     'email'     => $user->email,
+                    'image'     => !empty($user->image) ? $user->image : '',
                     'logged_in' => TRUE,
                     'login'     => TRUE
                 );

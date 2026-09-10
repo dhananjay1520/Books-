@@ -30,32 +30,32 @@
     }
 
     .new-arrivals-section .main-content {
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
         align-items: stretch;
-        gap: 25px;
+        gap: 22px;
         padding: 0 40px;
-        flex-wrap: wrap;
-        max-width: 1200px;
+        max-width: 1300px;
         margin: 0 auto;
     }
 
     .new-arrivals-section .product-card {
         background-color: #ffffff;
-        border-radius: 12px;
+        border-radius: 14px;
         border: 1px solid #f0f0f0;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        width: 220px;
+        width: 100%;
         padding: 16px;
         position: relative;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
         transition: all 0.3s ease;
     }
 
     .new-arrivals-section .product-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
         border-color: #e2e2e2;
     }
 
@@ -89,9 +89,9 @@
     .new-arrivals-section .product-image-wrapper {
         position: relative;
         width: 100%;
-        height: 240px;
+        aspect-ratio: 3 / 4;
         margin-bottom: 16px;
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
         background-color: #f9f9f9;
     }
@@ -100,6 +100,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         transition: transform 0.5s ease;
     }
 
@@ -158,15 +159,17 @@
     .new-arrivals-section .btn-add:active { transform: scale(0.97); }
     .new-arrivals-section .btn-add:disabled { background-color: #e0e0e0; color: #888; cursor: not-allowed; }
 
+    @media (max-width: 1150px) {
+        .new-arrivals-section .main-content { grid-template-columns: repeat(4, 1fr); }
+    }
     @media (max-width: 900px) {
-        .new-arrivals-section .main-content { gap: 15px; padding: 0 20px; }
-        .new-arrivals-section .product-card { width: calc(33.333% - 15px); }
+        .new-arrivals-section .main-content { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 20px; }
     }
-    @media (max-width: 768px) {
-        .new-arrivals-section .product-card { width: calc(50% - 15px); }
+    @media (max-width: 640px) {
+        .new-arrivals-section .main-content { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 480px) {
-        .new-arrivals-section .product-card { width: 100%; max-width: 280px; margin: 0 auto; }
+    @media (max-width: 420px) {
+        .new-arrivals-section .main-content { grid-template-columns: 1fr; max-width: 280px; }
         .new-arrivals-section .btn-rent { top: 20px; left: 20px; }
     }
 </style>
@@ -181,12 +184,13 @@
                 <button type="button" class="btn-rent" onclick="openRentPopup(
                     '<?php echo htmlspecialchars($product['id']); ?>',
                     '<?php echo htmlspecialchars($product['pr_name']); ?>',
-                    '<?php echo htmlspecialchars($product['image']); ?>'
+                    '<?php echo htmlspecialchars(product_image_url($product['image'])); ?>'
                 )">Rent</button>
 
                 <a href="<?= site_url('product/details/' . $product['id']); ?>" class="product-link">
                     <div class="product-image-wrapper">
-                        <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
+                        <img src="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image" loading="lazy"
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x600/f9f9f9/999999?text=No+Image';">
                     </div>
                     <div class="product-info">
                         <div class="product-name"><?php echo htmlspecialchars($product['pr_name']); ?></div>
@@ -205,7 +209,7 @@
                         <form class="add-to-cart-form" data-id="<?php echo htmlspecialchars($product['id']); ?>" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                             <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['pr_name']); ?>">
-                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars($product['image']); ?>">
+                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>">
                             <input type="hidden" name="product_price" value="<?php echo htmlspecialchars($product['pr_price']); ?>">
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit" class="btn-add">

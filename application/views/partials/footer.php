@@ -51,18 +51,21 @@
     .footer-col ul li a:hover { color: #ffffff; padding-left: 8px; }
 
     .footer-col .social-links a {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         height: 40px;
         width: 40px;
-        background-color: rgba(255, 255, 255, 0.2);
+        flex-shrink: 0;
+        background-color: rgba(255, 255, 255, 0.15);
         margin: 0 8px 10px 0;
         text-align: center;
-        line-height: 40px;
         border-radius: 50%;
         color: #ffffff;
+        font-size: 16px;
         transition: all 0.3s ease;
     }
-    .footer-col .social-links a:hover { color: #24262b; background-color: #ffffff; }
+    .footer-col .social-links a:hover { color: #24262b; background-color: #ffffff; transform: translateY(-3px); }
 
     .copyright-area { text-align: center; margin-top: 50px; }
     .copyright-area p { color: #bbbbbb; font-size: 13px; }
@@ -81,8 +84,8 @@
             <div class="footer-col">
                 <h4>Book Spot</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Services</a></li>
+                    <li><a href="<?= site_url('home'); ?>#about">About Us</a></li>
+                    <li><a href="<?= site_url('category'); ?>">Our Services</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Affiliate Program</a></li>
                 </ul>
@@ -93,7 +96,7 @@
                 <ul>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="<?= site_url('home'); ?>#contact">Contact Support</a></li>
                 </ul>
             </div>
 
