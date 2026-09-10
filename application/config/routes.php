@@ -1,54 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/userguide3/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
+
+// BookSpot Admin MVC
+$route['admin'] = 'admin/index';
+$route['admin/login'] = 'admin/login';
+$route['admin/logout'] = 'admin/logout';
+$route['admin/profile'] = 'admin/profile';
+$route['admin/profile/update'] = 'admin/update_profile';
+$route['admin/profile/upload_image'] = 'admin/upload_admin_image';
+$route['admin/orders'] = 'admin/orders';
+$route['admin/reports'] = 'admin/reports';
+$route['admin/users'] = 'admin/users';
+$route['admin/users/edit/(:num)'] = 'admin/edit_user/$1';
+$route['admin/users/delete/(:num)'] = 'admin/delete_user/$1';
+$route['admin/products'] = 'admin/products';
+$route['admin/products/add'] = 'admin/add_product';
+$route['admin/products/edit/(:num)'] = 'admin/edit_product/$1';
+$route['admin/products/delete/(:num)'] = 'admin/delete_product/$1';
+$route['admin/ebooks'] = 'admin/ebooks';
+$route['admin/ebooks/delete/(:num)'] = 'admin/delete_ebook/$1';
+$route['admin/messages'] = 'admin/messages';
+$route['admin/messages/view/(:num)'] = 'admin/view_message/$1';
+
+// Public profile routes retained for the existing front-end.
+$route['profile'] = 'profile/index';
+$route['profile/upload_image'] = 'profile/upload_image';
+$route['profile/update_account'] = 'profile/update_account';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

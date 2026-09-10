@@ -1,216 +1,97 @@
-<!--
-    Best Sellers partial.
-    Controller (Home.php) $bestsellers aur $cartStatusBestsellers bhejta hai.
-    Yahan koi $pdo query nahi hai.
--->
 <style>
-    .best-seller-section {
-        background-color: #f8f9fa;
-        padding: 50px 0;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .best-seller-section .category-heading {
-        text-align: center;
-        color: #1a1a1a;
-        font-size: 32px;
-        font-weight: 700;
-        margin-top: 0;
-        margin-bottom: 40px;
-        position: relative;
-    }
-
-    .best-seller-section .category-heading::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background-color: #f05a28;
-        border-radius: 2px;
-    }
-
-    .best-seller-section .main-content {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        align-items: stretch;
-        gap: 22px;
-        padding: 0 40px;
-        max-width: 1300px;
-        margin: 0 auto;
-    }
-
-    .best-seller-section .product-card {
-        background-color: #ffffff;
-        border-radius: 14px;
-        border: 1px solid #f0f0f0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        width: 100%;
-        padding: 15px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .best-seller-section .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
-        border-color: #e8e8e8;
-    }
-
-    .best-seller-section .product-badge {
-        position: absolute;
-        top: 25px;
-        left: 10px;
-        background-color: #d81b60;
-        color: #fff;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 0 20px 20px 0;
-        text-transform: uppercase;
-        z-index: 2;
-        letter-spacing: 0.5px;
-        box-shadow: 0 2px 5px rgba(216, 27, 96, 0.3);
-    }
-
-    .best-seller-section .product-link { text-decoration: none; color: inherit; flex-grow: 1; }
-
-    .best-seller-section .product-image-wrapper {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 3 / 4;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: #f4f4f4;
-    }
-
-    .best-seller-section .product-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.5s ease;
-    }
-
-    .best-seller-section .product-card:hover .product-image { transform: scale(1.05); }
-
-    .best-seller-section .product-info { margin-bottom: 15px; }
-
-    .best-seller-section .product-name {
-        font-size: 16px;
-        font-weight: 600;
-        color: #222;
-        line-height: 1.3;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .best-seller-section .product-author {
-        font-size: 13px;
-        color: #777;
-        margin-top: 4px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .best-seller-section .rating { margin-top: 8px; font-size: 13px; color: #ffc107; }
-
-    .best-seller-section .price-add-container { display: flex; flex-direction: column; margin-top: auto; }
-
-    .best-seller-section .product-price { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 12px; }
-
-    .best-seller-section .add-to-cart-form { width: 100%; }
-
-    .best-seller-section .btn-add {
-        width: 100%;
-        background: linear-gradient(135deg, #0e05b9, #0836bf);
-        color: white;
-        border: none;
-        padding: 12px 0;
-        font-size: 14px;
-        font-weight: 600;
-        border-radius: 8px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: background 0.3s, transform 0.1s;
-    }
-
-    .best-seller-section .btn-add:hover { background: linear-gradient(135deg, #e34c1b, #bf3f17); }
-    .best-seller-section .btn-add:active { transform: scale(0.97); }
-    .best-seller-section .btn-add:disabled { background: #e0e0e0; color: #888; cursor: not-allowed; box-shadow: none; }
-
-    @media (max-width: 1150px) {
-        .best-seller-section .main-content { grid-template-columns: repeat(4, 1fr); }
-    }
-    @media (max-width: 900px) {
-        .best-seller-section .main-content { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 20px; }
-    }
-    @media (max-width: 640px) {
-        .best-seller-section .main-content { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 420px) {
-        .best-seller-section .main-content { grid-template-columns: 1fr; max-width: 280px; }
-    }
+.bs-book-section{padding:42px 0;background:#fff}
+.bs-book-section.alt{background:#fafbfe}
+.bs-book-wrap{max-width:1360px;margin:0 auto;padding:0 28px}
+.bs-book-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}
+.bs-book-title{margin:0;color:#161b2d;font-size:28px;font-weight:800;letter-spacing:-.02em}
+.bs-view-all{color:#f15a24;text-decoration:none;font-size:15px;font-weight:800;white-space:nowrap}
+.bs-view-all:hover{text-decoration:underline}
+.bs-carousel{position:relative}
+.bs-track{display:flex;gap:28px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding:2px 2px 18px}
+.bs-track::-webkit-scrollbar{display:none}
+.bs-card{flex:0 0 250px;min-width:250px;text-decoration:none;color:inherit;position:relative}
+.bs-card-box{height:372px;border:1px solid #e1e3e8;border-radius:9px;background:#fff;padding:15px;position:relative;box-shadow:0 2px 8px rgba(31,41,55,.025);transition:transform .2s ease,box-shadow .2s ease}
+.bs-card:hover .bs-card-box{transform:translateY(-3px);box-shadow:0 10px 24px rgba(31,41,55,.08)}
+.bs-card-image{height:100%;width:100%;object-fit:cover;border-radius:3px;background:#f2f4f8;display:block}
+.bs-heart{position:absolute;right:10px;top:10px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#555;border:1px solid #e5e7eb;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:20px;z-index:2}
+.bs-card-name{margin:13px 0 0;font-size:18px;font-weight:700;color:#161616;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bs-card-meta{margin-top:7px;font-size:14px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bs-price-row{display:flex;align-items:baseline;gap:10px;margin-top:15px}
+.bs-price{font-size:21px;font-weight:800;color:#171717}
+.bs-cart-form{margin-top:12px}
+.bs-cart-btn{width:100%;border:0;border-radius:8px;padding:10px 12px;background:#ff5b2e;color:#fff;font-size:13px;font-weight:750;cursor:pointer}
+.bs-cart-btn:disabled{background:#e6e7eb;color:#74777e;cursor:not-allowed}
+.bs-nav{position:absolute;top:150px;width:52px;height:120px;border:0;border-radius:4px;background:#fff;box-shadow:0 6px 22px rgba(0,0,0,.12);display:grid;place-items:center;z-index:5;color:#444;font-size:28px;cursor:pointer}
+.bs-nav.left{left:-7px}.bs-nav.right{right:-7px}
+.bs-book-section.expanded .bs-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;gap:30px 24px;padding-bottom:8px}
+.bs-book-section.expanded .bs-card{min-width:0;flex:auto}
+.bs-book-section.expanded .bs-nav{display:none}
+@media(max-width:1200px){.bs-book-section.expanded .bs-track{grid-template-columns:repeat(3,minmax(0,1fr))}.bs-card{flex-basis:230px;min-width:230px}.bs-card-box{height:350px}}
+@media(max-width:800px){.bs-book-wrap{padding:0 18px}.bs-book-title{font-size:24px}.bs-track{gap:18px}.bs-card{flex-basis:205px;min-width:205px}.bs-card-box{height:315px}.bs-nav{width:42px;height:86px;top:130px}.bs-book-section.expanded .bs-track{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}}
+@media(max-width:480px){.bs-book-title{font-size:22px}.bs-card{flex-basis:174px;min-width:174px}.bs-card-box{height:270px;padding:10px}.bs-card-name{font-size:15px}.bs-card-meta{font-size:12px}.bs-price{font-size:18px}.bs-heart{width:34px;height:34px;font-size:17px}.bs-nav{display:none}.bs-book-section.expanded .bs-track{grid-template-columns:1fr 1fr;gap:18px 10px}}
 </style>
 
-<section class="best-seller-section">
-    <h2 class="category-heading">Best Sellers</h2>
-    <div class="main-content">
-        <?php foreach ($bestsellers as $product): ?>
-            <div class="product-card" data-id="<?php echo htmlspecialchars($product['id']); ?>">
-                <div class="product-badge">Top Pick</div>
-
-                <a href="<?= site_url('product/details/' . $product['id']); ?>" class="product-link">
-                    <div class="product-image-wrapper">
-                        <img src="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image" loading="lazy"
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x600/f4f4f4/999999?text=No+Image';">
-                    </div>
-
-                    <div class="product-info">
-                        <div class="product-name"><?php echo htmlspecialchars($product['pr_name']); ?></div>
-                        <div class="product-author">by <?php echo htmlspecialchars($product['pr_author_name']); ?></div>
-                        <div class="rating">
-                            <?php
-                            $rating = 4;
-                            for ($i = 0; $i < 5; $i++):
-                                echo $i < $rating ? '<i class="fa fa-star"></i>' : '<i class="fa fa-star-o"></i>';
-                            endfor;
-                            ?>
+<section class="bs-book-section alt" id="best-sellers-section">
+    <div class="bs-book-wrap">
+        <div class="bs-book-head">
+            <h2 class="bs-book-title">Best Sellers</h2>
+            <a href="#" class="bs-view-all" data-section="best-sellers-section">View All</a>
+        </div>
+        <div class="bs-carousel">
+            <button class="bs-nav left" type="button" aria-label="Previous best sellers" data-target="best-sellers-track">‹</button>
+            <div class="bs-track" id="best-sellers-track">
+                <?php foreach ($bestsellers as $product): ?>
+                    <article class="bs-card">
+                        <div class="bs-card-box">
+                            <span style="position:absolute;left:15px;top:15px;background:#ef3f22;color:#fff;border-radius:0 16px 16px 0;padding:5px 10px;font-size:10px;font-weight:800;z-index:2">TOP PICK</span>
+                            <button class="bs-heart" type="button" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link">
+                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" alt="<?= html_escape($product['pr_name']); ?>">
+                            </a>
                         </div>
-                    </div>
-                </a>
-
-                <div class="price-add-container">
-                    <div class="product-price">₹<?php echo htmlspecialchars($product['pr_price']); ?></div>
-
-                    <?php if (!empty($cartStatusBestsellers[$product['id']])): ?>
-                        <button class="btn-add" disabled>
-                            <i class="fa fa-check-circle"></i>&nbsp;Added to Cart
-                        </button>
-                    <?php else: ?>
-                        <form class="add-to-cart-form" method="POST">
-                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-                            <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['pr_name']); ?>">
-                            <input type="hidden" name="product_image" value="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>">
-                            <input type="hidden" name="product_price" value="<?php echo htmlspecialchars($product['pr_price']); ?>">
-                            <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="btn-add">
-                                <i class="fa-solid fa-cart-shopping"></i>&nbsp;Add to Cart
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </div>
+                        <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link" style="text-decoration:none;color:inherit">
+                            <div class="bs-card-name"><?= html_escape($product['pr_name']); ?></div>
+                            <div class="bs-card-meta">by <?= html_escape($product['pr_author_name']); ?></div>
+                        </a>
+                        <div class="bs-price-row"><span class="bs-price">₹ <?= html_escape($product['pr_price']); ?></span></div>
+                        <?php if (!empty($cartStatusBestsellers[$product['id']])): ?>
+                            <button class="bs-cart-btn" type="button" disabled><i class="fa-solid fa-check"></i> Added to Cart</button>
+                        <?php else: ?>
+                            <form class="add-to-cart-form bs-cart-form" method="POST">
+                                <input type="hidden" name="product_id" value="<?= html_escape($product['id']); ?>">
+                                <input type="hidden" name="product_name" value="<?= html_escape($product['pr_name']); ?>">
+                                <input type="hidden" name="product_image" value="<?= html_escape($product['image']); ?>">
+                                <input type="hidden" name="product_price" value="<?= html_escape($product['pr_price']); ?>">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="bs-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                            </form>
+                        <?php endif; ?>
+                    </article>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
+            <button class="bs-nav right" type="button" aria-label="Next best sellers" data-target="best-sellers-track">›</button>
+        </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.bs-nav').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            const track=document.getElementById(this.dataset.target);
+            if(!track) return;
+            const amount=Math.max(track.clientWidth*.82, 260);
+            track.scrollBy({left:this.classList.contains('left')?-amount:amount,behavior:'smooth'});
+        });
+    });
+    document.querySelectorAll('.bs-view-all').forEach(function(link){
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            const section=document.getElementById(this.dataset.section);
+            if(!section) return;
+            section.classList.toggle('expanded');
+            this.textContent=section.classList.contains('expanded')?'Show Less':'View All';
+        });
+    });
+});
+</script>

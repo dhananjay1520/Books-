@@ -34,7 +34,6 @@ class Category extends CI_Controller {
         $data['category_slug'] = $category_slug;
         $data['min_price']     = $min_price;
         $data['max_price']     = $max_price;
-        $data['categories']    = $this->Product_model->get_distinct_categories();
 
         $data['products'] = $this->Product_model->get_products_by_category($category_slug, $min_price, $max_price);
 

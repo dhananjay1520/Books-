@@ -1,0 +1,12 @@
+Admin UI update
+
+1. Sidebar starts collapsed on desktop (icon-only). BookSpot name is hidden while collapsed.
+2. Clicking the sidebar toggle opens the full sidebar with BookSpot and menu labels.
+3. Sidebar state is remembered on desktop with localStorage.
+4. Mobile sidebar opens as a full overlay drawer; no icon-only rail is shown.
+5. Dashboard no longer repeats the sidebar's navigation cards/management list.
+6. Dashboard graph removed.
+7. Dashboard now focuses on admin operations: catalog titles, stock units, low stock, customers, inventory watch, recent customers, customer message queue, and store snapshot.
+8. Dashboard contains no developer/host/server/internal technical information.
+9. Updated visual palette uses indigo, cyan, emerald, amber and dark navy accents with light/dark mode support.
+10. DataTables/export/profile functionality from the previous version is preserved.

@@ -149,7 +149,7 @@
     <div class="product-details-card">
 
         <div class="product-image-container">
-            <img src="<?php echo htmlspecialchars(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
+            <img src="<?php echo html_escape(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
         </div>
 
         <div class="product-info-panel">

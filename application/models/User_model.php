@@ -33,6 +33,14 @@ class User_model extends CI_Model {
     // ---------------------------------------------------------
 
     // Get user details by their ID (used for loading the profile)
+
+    public function get_user_by_email_except_id($email, $user_id) {
+        $this->db->where('email', $email);
+        $this->db->where('id !=', (int)$user_id);
+        $query = $this->db->get('users');
+        return ($query->num_rows() > 0) ? $query->row() : false;
+    }
+
     public function get_user_by_id($user_id) {
         $this->db->where('id', $user_id);
         $query = $this->db->get('users');

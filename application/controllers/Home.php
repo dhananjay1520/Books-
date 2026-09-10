@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper('url');
+        $this->load->helper(['url', 'product']);
         $this->load->library('session');
         $this->load->model('Product_model');
     }
@@ -32,8 +32,8 @@ class Home extends CI_Controller {
 
         // products fetch
         $data['products']     = $this->Product_model->get_all_products();
-        $data['bestsellers']  = $this->Product_model->get_bestsellers(5);
-        $data['new_arrivals'] = $this->Product_model->get_new_arrivals(5);
+        $data['bestsellers']  = $this->Product_model->get_bestsellers();
+        $data['new_arrivals'] = $this->Product_model->get_new_arrivals();
 
         // cart count for logged-in user
         if ($data['loggedIn'] && $user_id) {

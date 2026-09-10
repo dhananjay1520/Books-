@@ -1,372 +1,49 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Profile - BookSpot</title>
-<!-- Bootstrap 5 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- FontAwesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<!-- SweetAlert2 CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
 <style>
-    :root {
-        --brand: #0085a6;
-        --brand-dark: #006480;
-        --brand-light: #e6f6fa;
-    }
-
-    .profile-page-wrap { background-color: #f4f6f9; color: #333; font-family: 'Poppins', sans-serif; }
-
-    .profile-page-wrap .container { max-width: 1140px; }
-
-    .profile-page-wrap .page-heading { font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
-    .profile-page-wrap .page-subheading { color: #888; font-size: 14px; margin-bottom: 2rem; }
-
-    .profile-page-wrap .card {
-        border: none; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); margin-bottom: 24px; overflow: hidden;
-    }
-    .profile-page-wrap .card-header {
-        background-color: #fff; border-bottom: 1px solid #edf2f9; padding: 1.1rem 1.5rem; font-weight: 600;
-        display: flex; align-items: center; gap: 12px;
-    }
-    .profile-page-wrap .card-header .header-icon {
-        width: 34px; height: 34px; border-radius: 10px; background: var(--brand-light); color: var(--brand);
-        display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
-    }
-    .profile-page-wrap .card-header h5 { margin: 0; font-size: 16px; color: #1a1a1a; }
-    .profile-page-wrap .card-header small { display: block; font-size: 12px; color: #999; font-weight: 400; }
-
-    /* Profile photo card */
-    .profile-page-wrap .profile-card { text-align: center; }
-    .profile-page-wrap .profile-cover {
-        height: 90px; background: linear-gradient(135deg, var(--brand), #00b4d8);
-    }
-    .profile-page-wrap .profile-card .card-body { padding: 0 1.5rem 2rem; }
-    .profile-page-wrap .avatar-wrapper {
-        position: relative; width: 130px; height: 130px; margin: -65px auto 1rem;
-    }
-    .profile-page-wrap .profile-img {
-        width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-        border: 5px solid #fff; box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    }
-    .profile-page-wrap .cam-icon {
-        position: absolute; bottom: 4px; right: 4px; background: var(--brand); color: white; width: 34px; height: 34px;
-        border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
-        border: 3px solid #fff; transition: all 0.25s; font-size: 13px;
-    }
-    .profile-page-wrap .cam-icon:hover { background: var(--brand-dark); transform: scale(1.1); }
-    .profile-page-wrap .hidden-input { display: none; }
-
-    .profile-page-wrap .user-name { font-weight: 700; font-size: 1.15rem; color: #1a1a1a; }
-    .profile-page-wrap .user-email { color: #888; font-size: 13.5px; }
-
-    .profile-page-wrap .btn-brand {
-        background: var(--brand); border-color: var(--brand); color: #fff;
-    }
-    .profile-page-wrap .btn-brand:hover { background: var(--brand-dark); border-color: var(--brand-dark); color: #fff; }
-    .profile-page-wrap .btn-outline-brand {
-        border: 1px solid var(--brand); color: var(--brand); background: transparent;
-    }
-    .profile-page-wrap .btn-outline-brand:hover { background: var(--brand-light); }
-
-    .profile-page-wrap .img-hint { font-size: 12px; color: #999; }
-
-    .profile-page-wrap .form-label { font-weight: 500; font-size: 0.85rem; color: #555; margin-bottom: 6px; }
-    .profile-page-wrap .form-control {
-        border-radius: 8px; padding: 0.65rem 1rem; border: 1px solid #e1e5ea; font-size: 14.5px;
-    }
-    .profile-page-wrap .form-control:focus { border-color: var(--brand); box-shadow: 0 0 0 0.2rem rgba(0,133,166,0.15); }
-    .profile-page-wrap .form-control[readonly] { background-color: #f8f9fa; cursor: not-allowed; }
-    .profile-page-wrap .password-toggle { cursor: pointer; color: #999; background: #fff; border-color: #e1e5ea; }
-    .profile-page-wrap .password-hint { font-size: 12px; color: #999; }
-
-    .profile-page-wrap .form-actions {
-        display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; margin-bottom: 3rem;
-    }
-    .profile-page-wrap .form-actions .btn { padding: 10px 26px; border-radius: 8px; font-weight: 500; font-size: 14.5px; }
-
-    @media (max-width: 767px) {
-        .profile-page-wrap .form-actions { flex-direction: column-reverse; }
-        .profile-page-wrap .form-actions .btn { width: 100%; text-align: center; }
-    }
+.profile-shell{background:#f6f7fb;min-height:calc(100vh - 118px);padding:48px 20px;font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#18202f}.profile-container{max-width:1080px;margin:0 auto}.profile-heading{margin-bottom:28px}.profile-heading h1{font-size:30px;margin:0;font-weight:750;letter-spacing:-.03em}.profile-heading p{margin:8px 0 0;color:#748096;font-size:14px}.profile-grid{display:grid;grid-template-columns:310px 1fr;gap:24px}.profile-card{background:#fff;border:1px solid #e7eaf0;border-radius:18px;box-shadow:0 10px 35px rgba(25,34,52,.05)}.profile-side{overflow:hidden;text-align:center}.profile-cover{height:94px;background:linear-gradient(135deg,#4f46e5,#6974f3)}.profile-avatar-wrap{position:relative;width:126px;height:126px;margin:-63px auto 15px}.profile-avatar{width:126px;height:126px;border-radius:50%;object-fit:cover;background:#eef0ff;border:5px solid #fff;box-shadow:0 8px 22px rgba(25,34,52,.13)}.camera-btn{position:absolute;right:2px;bottom:4px;width:38px;height:38px;border-radius:50%;border:3px solid #fff;background:#4f46e5;color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(79,70,229,.25)}.camera-btn:hover{background:#4338ca}.profile-name{font-size:19px;font-weight:700}.profile-email{color:#7b8495;font-size:13px;margin-top:4px}.profile-side-body{padding:0 26px 28px}.photo-note{color:#9aa2b1;font-size:11px;margin-top:16px;line-height:1.5}.profile-form{padding:30px}.section-title{display:flex;align-items:center;gap:11px;font-size:16px;font-weight:700;margin-bottom:20px}.section-title i{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#eef0ff;color:#4f46e5;font-size:14px}.field-label{font-size:12px;font-weight:650;color:#5f697b;margin-bottom:7px}.profile-form .form-control{height:44px;border-radius:10px;border:1px solid #dfe3ea;font-size:13.5px}.profile-form .form-control:focus{border-color:#aeb5ef;box-shadow:0 0 0 4px rgba(79,70,229,.08)}.input-icon{position:relative}.input-icon i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#96a0b2;font-size:13px}.input-icon .form-control{padding-left:37px}.password-note{font-size:11px;color:#929aaa;margin-top:7px}.form-divider{border-top:1px solid #edf0f4;margin:28px 0}.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:25px}.btn-profile{border-radius:10px;padding:10px 19px;font-size:13px;font-weight:600}.btn-save{border:0;background:#4f46e5;color:#fff}.btn-save:hover{background:#4338ca;color:#fff}.btn-reset{background:#fff;border:1px solid #dfe3ea;color:#536074}.btn-reset:hover{background:#f8f9fc}.upload-status{font-size:12px;margin-top:10px;min-height:18px}.profile-alert{border-radius:10px;font-size:13px;padding:11px 13px;display:none}.profile-alert.show{display:block}@media(max-width:900px){.profile-grid{grid-template-columns:1fr}.profile-side{max-width:520px;margin:auto;width:100%}}@media(max-width:575px){.profile-shell{padding:28px 14px}.profile-heading h1{font-size:25px}.profile-form{padding:22px}.form-actions{flex-direction:column}.btn-profile{width:100%}}
 </style>
-
-<div class="profile-page-wrap py-5">
-    <div class="container">
-    <h3 class="page-heading">My Profile</h3>
-    <p class="page-subheading">Manage your personal information, profile photo and password.</p>
-    <div class="row">
-
-        <!-- LEFT SIDE: Profile Photo Card -->
-        <div class="col-lg-4 col-md-5">
-            <div class="card profile-card">
-                <div class="profile-cover"></div>
-                <div class="card-body">
-                    <form id="imageUploadForm" enctype="multipart/form-data">
-                        <div class="avatar-wrapper">
-                            <?php 
-                                $img_src = !empty($user->image) 
-                                    ? base_url('uploads/profile/'.$user->image) 
-                                    : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=0085a6&color=fff&size=150';
-                            ?>
-                            <img src="<?= $img_src ?>" alt="Profile Image" class="profile-img" id="profilePreview">
-                            
-                            <!-- Camera Icon for Upload -->
-                            <label for="profileImageInput" class="cam-icon" title="Change Image">
-                                <i class="fas fa-camera"></i>
-                            </label>
-                            <input type="file" name="profile_image" id="profileImageInput" class="hidden-input" accept="image/jpeg, image/png, image/webp, image/jpg">
-                        </div>
-                    </form>
-
-                    <div class="user-name"><?= html_escape($user->name) ?></div>
-                    <div class="user-email mb-3"><?= html_escape($user->email) ?></div>
-
-                    <!-- Step 1: choose an image (preview only, nothing is uploaded yet) -->
-                    <button type="button" id="chooseImageBtn" class="btn btn-outline-brand btn-sm rounded-pill px-4" onclick="document.getElementById('profileImageInput').click()">
-                        <?= !empty($user->image) ? 'Change Image' : 'Add Image' ?>
-                    </button>
-
-                    <!-- Step 2: only clicking Update actually uploads the chosen image -->
-                    <button type="button" id="updateImageBtn" class="btn btn-brand btn-sm rounded-pill px-4 d-none">
-                        <i class="fas fa-upload me-1"></i>Update Image
-                    </button>
-
-                    <p class="img-hint mt-2 mb-0">JPG, PNG or WEBP &bull; Max size 2MB</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT SIDE: Unified Form (Personal Info + Password) -->
-        <div class="col-lg-8 col-md-7">
-            <form id="updateAccountForm">
-                
-                <!-- Personal Information Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header-icon"><i class="fas fa-user-edit"></i></div>
-                        <div>
-                            <h5>Personal Information</h5>
-                            <small>Your basic contact and address details</small>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" value="<?= html_escape($user->name) ?>" required>
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" value="<?= html_escape($user->email) ?>" required readonly>
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">Mobile Number</label>
-                                <input type="text" name="mobile" class="form-control" value="<?= html_escape(isset($user->mobile) ? $user->mobile : '') ?>" required>
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">Address</label>
-                                <input type="text" name="address" class="form-control" value="<?= html_escape(isset($user->address) ? $user->address : '') ?>">
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">City</label>
-                                <input type="text" name="city" class="form-control" value="<?= html_escape(isset($user->city) ? $user->city : '') ?>">
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">State</label>
-                                <input type="text" name="state" class="form-control" value="<?= html_escape(isset($user->state) ? $user->state : '') ?>">
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">Country</label>
-                                <input type="text" name="country" class="form-control" value="<?= html_escape(isset($user->country) ? $user->country : '') ?>">
-                            </div>
-                            <div class="col-md-6 col-12 mb-3">
-                                <label class="form-label">Pincode</label>
-                                <input type="text" name="pincode" class="form-control" value="<?= html_escape(isset($user->pincode) ? $user->pincode : '') ?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Change Password Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header-icon"><i class="fas fa-lock"></i></div>
-                        <div>
-                            <h5>Change Password</h5>
-                            <small>Leave blank to keep your current password</small>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label">Current Password</label>
-                            <div class="input-group">
-                                <input type="password" name="current_password" class="form-control pwd-input">
-                                <span class="input-group-text password-toggle"><i class="fas fa-eye"></i></span>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">New Password</label>
-                            <div class="input-group">
-                                <input type="password" name="new_password" class="form-control pwd-input" minlength="8">
-                                <span class="input-group-text password-toggle"><i class="fas fa-eye"></i></span>
-                            </div>
-                            <small class="password-hint">Minimum 8 characters</small>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Confirm New Password</label>
-                            <div class="input-group">
-                                <input type="password" name="confirm_password" class="form-control pwd-input" minlength="8">
-                                <span class="input-group-text password-toggle"><i class="fas fa-eye"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FORM BUTTONS (Cancel & Save) -->
-                <div class="form-actions">
-                    <!-- Cancel Button: takes the user back to the home page -->
-                    <a href="<?= site_url('home') ?>" class="btn btn-outline-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-brand"><i class="fas fa-save me-2"></i>Save Changes</button>
-                </div>
-
-            </form>
-        </div>
-    </div>
-    </div>
+<section class="profile-shell">
+<div class="profile-container">
+<div class="profile-heading"><h1>My Profile</h1><p>Update your account information, profile photo and password.</p></div>
+<div class="profile-grid">
+<aside class="profile-card profile-side">
+<div class="profile-cover"></div>
+<div class="profile-side-body">
+<div class="profile-avatar-wrap">
+<?php if(!empty($user->image)): ?><img class="profile-avatar" id="profilePreview" src="<?= base_url('uploads/profile/'.rawurlencode($user->image)) ?>" alt="Profile photo"><?php else: ?><div class="profile-avatar" id="profilePreview" style="display:grid;place-items:center;color:#4f46e5;font-size:36px"><i class="fa-solid fa-user"></i></div><?php endif; ?>
+<label class="camera-btn" for="profileImageInput" title="Change profile photo"><i class="fa-solid fa-camera"></i></label>
+<input type="file" id="profileImageInput" name="profile_image" accept="image/jpeg,image/png,image/webp" hidden>
 </div>
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<div class="profile-name" id="profileNameCard"><?= html_escape($user->name) ?></div>
+<div class="profile-email"><?= html_escape($user->email) ?></div>
+<div class="upload-status" id="uploadStatus"></div>
+<div class="photo-note">JPG, PNG or WEBP · Maximum 2 MB<br>Your photo is shown in the account menu.</div>
+</div>
+</aside>
+<main class="profile-card profile-form">
+<form id="accountForm" enctype="multipart/form-data">
+<div class="section-title"><i class="fa-regular fa-id-card"></i><span>Account details</span></div>
+<div id="profileAlert" class="profile-alert mb-3"></div>
+<div class="row g-3">
+<div class="col-md-6"><label class="field-label">Full name</label><div class="input-icon"><i class="fa-regular fa-user"></i><input class="form-control" type="text" name="name" value="<?= html_escape($user->name) ?>" required></div></div>
+<div class="col-md-6"><label class="field-label">Email address</label><div class="input-icon"><i class="fa-regular fa-envelope"></i><input class="form-control" type="email" name="email" value="<?= html_escape($user->email) ?>" required></div></div>
+</div>
+<div class="form-divider"></div>
+<div class="section-title"><i class="fa-solid fa-lock"></i><span>Change password</span></div>
+<p class="password-note mb-3">Leave all password fields empty when you only want to update your name or email.</p>
+<div class="row g-3">
+<div class="col-md-4"><label class="field-label">Current password</label><input class="form-control" type="password" name="current_password" autocomplete="current-password" placeholder="Current password"></div>
+<div class="col-md-4"><label class="field-label">New password</label><input class="form-control" type="password" name="new_password" autocomplete="new-password" placeholder="New password"></div>
+<div class="col-md-4"><label class="field-label">Confirm new password</label><input class="form-control" type="password" name="confirm_password" autocomplete="new-password" placeholder="Confirm password"></div>
+</div>
+<div class="form-actions"><button type="reset" class="btn btn-profile btn-reset">Reset changes</button><button type="submit" class="btn btn-profile btn-save" id="saveProfileBtn"><i class="fa-solid fa-check me-1"></i> Save changes</button></div>
+</form>
+</main></div></div>
+</section>
 <script>
-$(document).ready(function() {
-    const baseUrl = '<?= base_url() ?>';
-
-    // 1. Image select -> preview ONLY. Nothing is uploaded to the server
-    // until the user explicitly clicks "Update Image".
-    $('#profileImageInput').change(function() {
-        let file = this.files[0];
-        if (!file) return;
-
-        let fileType = file.type;
-        let fileSize = file.size;
-        let validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-
-        if (!validTypes.includes(fileType)) {
-            Swal.fire('Error', 'Only JPG, JPEG, PNG, and WEBP are allowed.', 'error');
-            $(this).val('');
-            return;
-        }
-        if (fileSize > 2 * 1024 * 1024) {
-            Swal.fire('Error', 'Image size must be less than 2MB.', 'error');
-            $(this).val('');
-            return;
-        }
-
-        // Sirf preview - server par kuch bhi ab tak upload nahi hua
-        let reader = new FileReader();
-        reader.onload = function(e) { $('#profilePreview').attr('src', e.target.result); };
-        reader.readAsDataURL(file);
-
-        // Ab "Update Image" button dikhao taaki user confirm kar sake
-        $('#updateImageBtn').removeClass('d-none');
-    });
-
-    // 2. "Update Image" click -> ab jaake actual upload hota hai
-    $('#updateImageBtn').click(function() {
-        let file = $('#profileImageInput')[0].files[0];
-        if (!file) return;
-
-        let $btn = $(this);
-        let originalText = $btn.html();
-        $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Updating...');
-
-        let formData = new FormData($('#imageUploadForm')[0]);
-        $.ajax({
-            url: baseUrl + 'profile/upload_image',
-            type: 'POST',
-            data: formData,
-            contentType: false, processData: false, dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: response.message, showConfirmButton: false, timer: 3000 });
-                    $('#profilePreview').attr('src', response.image_url);
-                    $('#chooseImageBtn').text('Change Image');
-                    $('#updateImageBtn').addClass('d-none');
-                    $('#profileImageInput').val('');
-                } else {
-                    Swal.fire('Error', response.message, 'error');
-                }
-            },
-            error: function(xhr) {
-                console.error('upload_image failed. HTTP status:', xhr.status, 'Response:', xhr.responseText);
-                let msg = 'Something went wrong while uploading the image.';
-                if (xhr.status === 404) {
-                    msg = 'Upload endpoint not found (404). Check the "profile/upload_image" route.';
-                } else if (xhr.status === 500) {
-                    msg = 'Server error while uploading (500). Check the PHP error log / open browser console.';
-                } else if (xhr.status === 0) {
-                    msg = 'Could not reach the server. Check your network connection or base_url() setting.';
-                }
-                Swal.fire('Error', msg, 'error');
-            },
-            complete: function() {
-                $btn.prop('disabled', false).html(originalText);
-            }
-        });
-    });
-
-    // 2. Unified Form Submission (Personal Info + Password)
-    $('#updateAccountForm').submit(function(e) {
-        e.preventDefault();
-        
-        // Optional: Simple JS validation to ensure all password fields are filled if one is
-        let curPwd = $('input[name="current_password"]').val();
-        let newPwd = $('input[name="new_password"]').val();
-        let confPwd = $('input[name="confirm_password"]').val();
-
-        if (curPwd || newPwd || confPwd) {
-            if (!curPwd || !newPwd || !confPwd) {
-                Swal.fire('Validation Error', 'Please fill in all password fields to change your password.', 'error');
-                return;
-            }
-        }
-
-        $.ajax({
-            url: baseUrl + 'profile/update_account', // <-- Calling a unified controller method
-            type: 'POST',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    Swal.fire('Success!', response.message, 'success');
-                    // Clear password fields on success
-                    $('.pwd-input').val('');
-                } else {
-                    Swal.fire('Error', response.message, 'error');
-                }
-            },
-            error: function(xhr) {
-                Swal.fire('Error', 'Could not save your changes. Please check your connection and try again.', 'error');
-                console.error('update_account failed:', xhr.responseText);
-            }
-        });
-    });
-
-    // 3. Password Toggle Show/Hide
-    $('.password-toggle').click(function() {
-        let input = $(this).siblings('.pwd-input');
-        let icon = $(this).find('i');
-        if (input.attr('type') === 'password') {
-            input.attr('type', 'text');
-            icon.removeClass('fa-eye').addClass('fa-eye-slash');
-        } else {
-            input.attr('type', 'password');
-            icon.removeClass('fa-eye-slash').addClass('fa-eye');
-        }
-    });
+document.addEventListener('DOMContentLoaded',function(){
+ const imageInput=document.getElementById('profileImageInput'),preview=document.getElementById('profilePreview'),status=document.getElementById('uploadStatus'),form=document.getElementById('accountForm'),alertBox=document.getElementById('profileAlert'),saveBtn=document.getElementById('saveProfileBtn');
+ function showAlert(type,msg){alertBox.className='profile-alert mb-3 show alert alert-'+type;alertBox.textContent=msg;window.scrollTo({top:0,behavior:'smooth'});}
+ imageInput.addEventListener('change',function(){const file=this.files[0];if(!file)return;if(file.size>2*1024*1024){status.innerHTML='<span class="text-danger">Image must be 2 MB or smaller.</span>';this.value='';return;}if(!['image/jpeg','image/png','image/webp'].includes(file.type)){status.innerHTML='<span class="text-danger">Please select JPG, PNG or WEBP.</span>';this.value='';return;}const previewUrl=URL.createObjectURL(file);if(preview.tagName==='IMG'){preview.src=previewUrl}else{const img=document.createElement('img');img.id='profilePreview';img.className='profile-avatar';img.src=previewUrl;img.alt='Profile photo';preview.replaceWith(img);}status.innerHTML='<span class="text-muted">Photo selected. Click Save changes to update it.</span>';});
+ form.addEventListener('submit',function(e){e.preventDefault();saveBtn.disabled=true;saveBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin me-1"></i> Saving...';fetch('<?= site_url('profile/update_account') ?>',{method:'POST',body:new FormData(form),headers:{'X-Requested-With':'XMLHttpRequest'}}).then(r=>r.json()).then(data=>{showAlert(data.status==='success'?'success':'danger',data.message||'Something went wrong.');if(data.status==='success'){document.getElementById('profileNameCard').textContent=form.querySelector('[name="name"]').value;form.querySelector('[name="current_password"]').value='';form.querySelector('[name="new_password"]').value='';form.querySelector('[name="confirm_password"]').value='';const menuName=document.getElementById('menuUserName');if(menuName)menuName.textContent=form.querySelector('[name="name"]').value;if(data.image_url){const cache=data.image_url+'?v='+Date.now();const nav=document.getElementById('navProfileImage');if(nav)nav.src=cache;else{const icon=document.getElementById('navProfileIcon');if(icon){const img=document.createElement('img');img.id='navProfileImage';img.className='book-avatar';img.alt='Profile';img.src=cache;icon.replaceWith(img);}}const menuImg=document.getElementById('menuProfileImage');if(menuImg)menuImg.src=cache;else{const menuIcon=document.getElementById('menuProfileIcon');if(menuIcon){const img=document.createElement('img');img.id='menuProfileImage';img.className='mini-avatar';img.alt='Profile';img.src=cache;menuIcon.replaceWith(img);}}imageInput.value='';status.innerHTML='<span class="text-success">Photo and profile saved successfully.</span>';}else{status.innerHTML='<span class="text-success">Profile saved successfully.</span>';}}}).catch(()=>showAlert('danger','Unable to save your changes.')).finally(()=>{saveBtn.disabled=false;saveBtn.innerHTML='<i class="fa-solid fa-check me-1"></i> Save changes'});});
 });
 </script>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+<rect width="600" height="800" fill="#eef2f4"/>
+<rect x="70" y="90" width="460" height="620" rx="24" fill="#ffffff" stroke="#d7dee3" stroke-width="4"/>
+<path d="M180 535c45-82 119-123 120-123s75 41 120 123" fill="none" stroke="#0c778c" stroke-width="24" stroke-linecap="round"/>
+<path d="M213 375c18-57 70-99 87-99s69 42 87 99" fill="none" stroke="#f4a340" stroke-width="22" stroke-linecap="round"/>
+<text x="300" y="635" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#18323d">BookSpot</text>
+<text x="300" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6b7b83">No cover available</text>
+</svg>

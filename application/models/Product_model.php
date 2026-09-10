@@ -55,17 +55,23 @@ class Product_model extends CI_Model {
     }
 
     // best_seller.php me: "SELECT * FROM products WHERE is_bestseller = 1 LIMIT 5"
-    public function get_bestsellers($limit = 5) {
+    public function get_bestsellers($limit = null) {
         $this->db->where('is_bestseller', 1);
-        $this->db->limit($limit);
+        $this->db->order_by('id', 'DESC');
+        if ($limit !== null) {
+            $this->db->limit((int) $limit);
+        }
         $query = $this->db->get('products');
         return $query->result_array();
     }
 
     // new_arrivals.php me: "SELECT * FROM products WHERE is_newarrival = 1 LIMIT 5"
-    public function get_new_arrivals($limit = 5) {
+    public function get_new_arrivals($limit = null) {
         $this->db->where('is_newarrival', 1);
-        $this->db->limit($limit);
+        $this->db->order_by('id', 'DESC');
+        if ($limit !== null) {
+            $this->db->limit((int) $limit);
+        }
         $query = $this->db->get('products');
         return $query->result_array();
     }
@@ -81,18 +87,6 @@ class Product_model extends CI_Model {
         if (!empty($max_price)) {
             $this->db->where('pr_price <=', $max_price);
         }
-        $query = $this->db->get('products');
-        return $query->result_array();
-    }
-
-    // Category filter dropdown ke liye: DB mein jitni distinct categories
-    // hain wo hi return karo (hardcoded list ki jagah)
-    public function get_distinct_categories() {
-        $this->db->select('pr_cate');
-        $this->db->distinct();
-        $this->db->where('pr_cate IS NOT NULL');
-        $this->db->where('pr_cate !=', '');
-        $this->db->order_by('pr_cate', 'ASC');
         $query = $this->db->get('products');
         return $query->result_array();
     }

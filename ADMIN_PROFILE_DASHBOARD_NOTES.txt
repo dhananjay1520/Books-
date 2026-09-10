@@ -1,0 +1,8 @@
+BOOKSPOT ADMIN / PROFILE NOTES
+
+1. Run database_admin_profile_safe.sql for admin profile columns.
+2. Run database_profile_update.sql for users profile columns. The existing users.address column is not added again.
+3. Admin profile photo is saved only when Save changes is clicked.
+4. Public user profile photo is also saved only when Save changes is clicked.
+5. Home/product card image URLs are normalized with product_image_url() so existing product image values render correctly.
+6. Admin profile uses its own admin navbar/footer layout. Public user profile uses the normal BookSpot navbar/footer.

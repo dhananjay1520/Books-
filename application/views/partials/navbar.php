@@ -1,268 +1,68 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-    :root {
-        --bg-color: #f8f9fa;
-        --top-nav-bg: #0085a6;
-        --top-nav-text: #ffffff;
-        --bottom-nav-bg: #ffffff;
-        --bottom-nav-text: #444444;
-        --bottom-nav-border: #e0e0e0;
-        --dropdown-bg: #ffffff;
-        --dropdown-text: #333333;
-        --dropdown-hover: #f1f1f1;
-        --dropdown-border: #eeeeee;
-        --search-bg: #ffffff;
-        --search-text: #333333;
-        --search-placeholder: #888888;
-        --accent-color: #0085a6;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); }
-
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: var(--top-nav-bg);
-        padding: 15px 40px;
-    }
-
-    .logo {
-        color: var(--top-nav-text);
-        font-size: 28px;
-        font-weight: 700;
-        text-decoration: none;
-        font-family: 'Playfair Display', serif;
-        transition: opacity 0.3s;
-    }
-    .logo:hover { opacity: 0.9; }
-
-    .nav-right { display: flex; align-items: center; gap: 30px; }
-
-    .search-container { display: flex; align-items: center; width: 320px; position: relative; }
-    .search-container input[type="text"] {
-        width: 100%;
-        padding: 10px 15px 10px 40px;
-        border: none;
-        border-radius: 20px;
-        font-size: 14px;
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--search-bg);
-        color: var(--search-text);
-        outline: none;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        transition: box-shadow 0.3s;
-    }
-    .search-container input[type="text"]::placeholder { color: var(--search-placeholder); }
-    .search-container input[type="text"]:focus { box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
-
-    .search-icon-inside { position: absolute; left: 15px; color: var(--search-placeholder); font-size: 14px; }
-
-    .icons { display: flex; align-items: center; gap: 22px; }
-    .icons a, .dropbtn {
-        color: var(--top-nav-text);
-        text-decoration: none;
-        font-size: 22px;
-        position: relative;
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: color 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .icons a:hover, .dropbtn:hover { color: #d1f2fb; }
-
-    .cart-icon { position: relative; display: inline-block; }
-    .cart-count {
-        position: absolute;
-        top: -8px;
-        right: -12px;
-        background-color: #ff4757;
-        color: white;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 2px 6px;
-        border-radius: 20px;
-        border: 2px solid var(--top-nav-bg);
-    }
-
-    /* Naya CSS class profile image ke liye */
-    .nav-profile-img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--top-nav-text);
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .dropdown { position: relative; display: inline-block; }
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 45px;
-        background-color: var(--dropdown-bg);
-        min-width: 180px;
-        box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
-        border-radius: 10px;
-        overflow: hidden;
-        z-index: 100;
-        border: 1px solid var(--dropdown-border);
-    }
-    .dropdown-content.show { display: block; animation: fadeIn 0.2s ease-in-out; }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .dropdown-content a {
-        color: var(--dropdown-text);
-        padding: 12px 20px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 14px;
-        transition: background-color 0.2s, color 0.2s;
-    }
-    .dropdown-content a:hover { background-color: var(--dropdown-hover); color: var(--accent-color); }
-
-    .dropdown-header {
-        display: block;
-        padding: 14px 20px;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--dropdown-text);
-        background-color: var(--dropdown-hover);
-        border-bottom: 1px solid var(--dropdown-border);
-        cursor: default;
-    }
-
-    .logout-btn { color: #d9534f !important; border-top: 1px solid var(--dropdown-border); }
-    .logout-btn:hover { background-color: #fff5f5 !important; }
-
-    .nav-links-container {
-        display: flex;
-        justify-content: flex-start;
-        background-color: var(--bottom-nav-bg);
-        padding: 16px 40px;
-        border-bottom: 1px solid var(--bottom-nav-border);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-    .nav-links { display: flex; gap: 30px; }
-    .nav-links a {
-        color: var(--bottom-nav-text);
-        text-decoration: none;
-        font-size: 15px;
-        font-weight: 500;
-        transition: color 0.3s;
-        position: relative;
-    }
-    .nav-links a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -4px;
-        left: 0;
-        background-color: var(--accent-color);
-        transition: width 0.3s;
-    }
-    .nav-links a:hover { color: var(--accent-color); }
-    .nav-links a:hover::after { width: 100%; }
-
-    @media (max-width: 768px) {
-        .navbar { flex-direction: column; padding: 15px 20px; gap: 15px; }
-        .nav-right { flex-direction: column; width: 100%; gap: 20px; }
-        .search-container { width: 100%; }
-        .nav-links-container { padding: 15px 20px; overflow-x: auto; white-space: nowrap; }
-        .nav-links { gap: 20px; }
-    }
+:root{--bs-brand:#5b4bdb;--bs-brand-2:#7c6cf3;--bs-ink:#182033;--bs-muted:#6b7280;--bs-line:#e7eaf0;--bs-soft:#f6f7fb;--bs-dark:#111827}
+.book-navbar{position:sticky;top:0;z-index:1500;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bs-line);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.book-top{min-height:76px;display:flex;align-items:center;gap:16px;padding:0 4%;max-width:1440px;margin:auto}.book-menu-toggle{width:42px;height:42px;border:1px solid var(--bs-line);background:#fff;border-radius:12px;color:var(--bs-ink);display:grid;place-items:center;cursor:pointer;transition:.2s}.book-menu-toggle:hover{color:var(--bs-brand);border-color:#cfc9ff;background:#faf9ff}.book-logo{font-size:27px;font-weight:800;text-decoration:none;color:var(--bs-ink);letter-spacing:-.04em;white-space:nowrap}.book-logo span{color:var(--bs-brand)}.book-search{position:relative;flex:1;max-width:520px;margin-left:auto}.book-search input{width:100%;border:1px solid var(--bs-line);background:#f8f9fc;border-radius:14px;padding:12px 16px 12px 44px;font-size:13px;outline:none;transition:.2s;box-sizing:border-box}.book-search input:focus{border-color:#c8c2ff;background:#fff;box-shadow:0 0 0 4px rgba(91,75,219,.08)}.book-search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8b93a5;font-size:14px}.book-actions{display:flex;align-items:center;gap:8px;margin-left:auto}.book-icon-link,.book-user-btn{position:relative;width:42px;height:42px;border:0;background:transparent;display:grid;place-items:center;color:#4b5563;text-decoration:none;border-radius:12px;cursor:pointer}.book-icon-link:hover,.book-user-btn:hover{background:#f4f2ff;color:var(--bs-brand)}.book-cart-count{position:absolute;top:0;right:-1px;background:#ef476f;color:#fff;border-radius:999px;font-size:9px;line-height:16px;min-width:16px;height:16px;text-align:center;border:2px solid #fff}.book-user{position:relative}.book-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 2px 8px rgba(23,32,51,.12)}.book-avatar-fallback{background:#ece9ff;color:var(--bs-brand);display:grid;place-items:center;font-size:15px}.book-user-chevron{font-size:9px;margin-left:2px;color:#7a8495}.book-user-menu{display:none;position:absolute;right:0;top:50px;width:250px;background:#fff;border:1px solid var(--bs-line);border-radius:16px;box-shadow:0 22px 50px rgba(23,32,51,.16);padding:8px}.book-user-menu.show{display:block}.book-menu-head{display:flex;align-items:center;gap:11px;padding:11px 10px 13px;border-bottom:1px solid #eef0f4;margin-bottom:5px}.mini-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#ece9ff;color:var(--bs-brand);display:grid;place-items:center}.book-menu-name{font-size:13px;font-weight:700;color:var(--bs-ink)}.book-menu-email{font-size:11px;color:var(--bs-muted);margin-top:2px;word-break:break-word}.book-menu-item{display:flex;align-items:center;gap:11px;color:#384152;text-decoration:none;padding:11px;border-radius:10px;font-size:13px}.book-menu-item:hover{background:var(--bs-soft);color:var(--bs-brand)}.book-menu-item.logout{color:#dc4c64;border-top:1px solid #eef0f4;border-radius:0 0 10px 10px;margin-top:4px;padding-top:13px}.book-nav{border-top:1px solid #f2f3f6}.book-nav-inner{display:flex;align-items:center;gap:30px;padding:0 4%;height:46px;max-width:1440px;margin:auto}.book-nav a{font-size:13px;font-weight:650;color:#667085;text-decoration:none;position:relative;height:46px;display:flex;align-items:center}.book-nav a:hover{color:var(--bs-brand)}.book-nav a:after{content:'';position:absolute;height:2px;width:0;left:0;bottom:0;background:var(--bs-brand);transition:.2s}.book-nav a:hover:after{width:100%}
+.book-sidebar-overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);opacity:0;visibility:hidden;transition:.25s;z-index:1550}.book-sidebar-overlay.show{opacity:1;visibility:visible}.book-sidebar{position:fixed;left:-320px;top:0;bottom:0;width:300px;background:linear-gradient(180deg,#ffffff 0%,#fbfbff 100%);border-right:1px solid var(--bs-line);box-shadow:20px 0 50px rgba(17,24,39,.1);z-index:1600;transition:left .28s ease;padding:22px 18px;box-sizing:border-box;overflow:auto}.book-sidebar.open{left:0}.sidebar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.sidebar-title{font-weight:800;font-size:20px;color:var(--bs-ink)}.sidebar-title span{color:var(--bs-brand)}.sidebar-close{width:36px;height:36px;border:1px solid var(--bs-line);background:#fff;border-radius:10px;color:#5f6673;cursor:pointer}.sidebar-close:hover{color:#fff;background:var(--bs-brand);border-color:var(--bs-brand)}.sidebar-profile{display:flex;gap:12px;align-items:center;padding:12px;background:#f4f2ff;border:1px solid #e7e2ff;border-radius:14px;margin-bottom:18px}.sidebar-profile .avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#ddd7ff;display:grid;place-items:center;color:var(--bs-brand);font-size:18px}.sidebar-profile strong{display:block;font-size:13px;color:var(--bs-ink)}.sidebar-profile span{display:block;font-size:11px;color:var(--bs-muted);margin-top:2px}.side-group{margin-top:18px}.side-label{text-transform:uppercase;font-size:10px;font-weight:800;letter-spacing:.12em;color:#9aa1af;padding:0 8px;margin-bottom:8px}.side-link{display:flex;align-items:center;gap:12px;padding:11px 12px;margin-bottom:4px;border-radius:11px;text-decoration:none;color:#475467;font-size:13px;font-weight:650}.side-link i{width:18px;text-align:center;color:#6f63dc}.side-link:hover{background:#f4f2ff;color:var(--bs-brand)}
+@media(max-width:850px){.book-search{order:5;flex-basis:100%;max-width:none;margin:0}.book-top{flex-wrap:wrap;padding:12px 4%;min-height:auto}.book-nav-inner{overflow:auto;white-space:nowrap}.book-user-chevron{display:none}}
+@media(max-width:520px){.book-logo{font-size:23px}.book-icon-link{display:none}.book-actions{margin-left:auto}.book-sidebar{width:86vw;max-width:320px}}
 </style>
-
-<header>
-    <div class="navbar">
-        <a href="<?= site_url('home'); ?>" class="logo">BookSpot</a>
-
-        <div class="nav-right">
-            <form action="<?= site_url('product/search'); ?>" method="GET" class="search-container">
-                <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
-                <input type="text" name="query" id="search" placeholder="Search for books, authors..." required aria-label="Search books">
-                <button type="submit" style="display: none;"></button>
-            </form>
-
-            <div class="icons">
-                <a href="<?= site_url('cart'); ?>" class="cart-icon" aria-label="Shopping Cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cartCount" class="cart-count">
-                        <?php echo isset($cartCount) ? htmlspecialchars($cartCount) : '0'; ?>
-                    </span>
-                </a>
-
-                <div class="dropdown">
-                    <button onclick="toggleUserMenu()" class="dropbtn" aria-label="User Menu">
-                        <?php
-                            // Logged-in user ki uploaded image; agar nahi hai to naam se
-                            // generate hui ek circle avatar dikhao (icon nahi)
-                            $nav_user_image = $this->session->userdata('image');
-                            $nav_user_name  = !empty($loggedIn) ? $this->session->userdata('name') : 'Guest';
-
-                            $nav_avatar_src = (!empty($loggedIn) && !empty($nav_user_image))
-                                ? base_url('uploads/profile/' . htmlspecialchars($nav_user_image))
-                                : 'https://ui-avatars.com/api/?name=' . urlencode($nav_user_name) . '&background=ffffff&color=0085a6&size=64&bold=true';
-                        ?>
-                        <img src="<?= $nav_avatar_src ?>" alt="Profile" class="nav-profile-img">
-                    </button>
-
-                    <div id="userDropdown" class="dropdown-content">
-                        <?php if (!empty($loggedIn)): ?>
-                            <span class="dropdown-header">Hi, <?php echo htmlspecialchars($name); ?></span>
-                            <a href="<?= site_url('profile'); ?>"><i class="fa-regular fa-address-card"></i> My Profile</a>
-                            <a href="<?= site_url('orders'); ?>"><i class="fa-solid fa-box-open"></i> My Orders</a>
-                            <a href="<?= site_url('auth/logout'); ?>" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-                        <?php else: ?>
-                            <a href="<?= site_url('auth/login'); ?>"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-                            <a href="<?= site_url('auth/signup'); ?>"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
-                        <?php endif; ?>
+<header class="book-navbar">
+    <div class="book-top">
+        <button class="book-menu-toggle" id="bookSidebarToggle" type="button" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+        <a href="<?= site_url('home'); ?>" class="book-logo">Book<span>Spot</span></a>
+        <form action="<?= site_url('product/search'); ?>" method="GET" class="book-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" name="query" placeholder="Search books, authors..." required aria-label="Search books"></form>
+        <div class="book-actions">
+            <a href="<?= site_url('cart'); ?>" class="book-icon-link" aria-label="Shopping cart"><i class="fa-solid fa-bag-shopping"></i><span class="book-cart-count" id="cartCount"><?php echo isset($cartCount) ? htmlspecialchars($cartCount) : '0'; ?></span></a>
+            <?php $nav_logged_in=(bool)$this->session->userdata('login'); $nav_user_name=(string)$this->session->userdata('name'); $nav_user_email=(string)$this->session->userdata('email'); $nav_user_image=(string)$this->session->userdata('image'); ?>
+            <div class="book-user">
+                <button class="book-user-btn" id="bookUserBtn" type="button" aria-label="Account menu">
+                    <?php if($nav_logged_in && $nav_user_image): ?><img id="navProfileImage" src="<?= base_url('uploads/profile/'.rawurlencode($nav_user_image)); ?>" class="book-avatar" alt="Profile"><?php else: ?><span class="book-avatar book-avatar-fallback" id="navProfileIcon"><i class="fa-solid fa-user"></i></span><?php endif; ?><i class="fa-solid fa-chevron-down book-user-chevron"></i>
+                </button>
+                <div class="book-user-menu" id="bookUserMenu">
+                    <?php if($nav_logged_in): ?>
+                    <div class="book-menu-head">
+                        <?php if($nav_user_image): ?><img class="mini-avatar" id="menuProfileImage" src="<?= base_url('uploads/profile/'.rawurlencode($nav_user_image)); ?>" alt="Profile"><?php else: ?><span class="mini-avatar" id="menuProfileIcon"><i class="fa-solid fa-user"></i></span><?php endif; ?>
+                        <div><div class="book-menu-name" id="menuUserName"><?= html_escape($nav_user_name) ?></div><div class="book-menu-email"><?= html_escape($nav_user_email) ?></div></div>
                     </div>
+                    <a class="book-menu-item" href="<?= site_url('profile'); ?>"><i class="fa-regular fa-id-card"></i> My Profile</a>
+                    <a class="book-menu-item logout" href="<?= site_url('auth/logout'); ?>"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    <?php else: ?>
+                    <a class="book-menu-item" href="<?= site_url('auth/login'); ?>"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                    <a class="book-menu-item" href="<?= site_url('auth/signup'); ?>"><i class="fa-solid fa-user-plus"></i> Create Account</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
-
-    <nav class="nav-links-container" aria-label="Main Navigation">
-        <div class="nav-links">
-            <a href="<?= site_url('home'); ?>">Home</a>
-            <a href="<?= site_url('category'); ?>">Category</a>
-            <a href="<?= site_url('myebook'); ?>">Ebook</a>
-            <a href="<?= site_url('home'); ?>#about">About Us</a>
-            <a href="<?= site_url('home'); ?>#contact">Contact</a>
-        </div>
-    </nav>
+    <nav class="book-nav"><div class="book-nav-inner"><a href="<?= site_url('home'); ?>">Home</a><a href="<?= site_url('category'); ?>">Categories</a><a href="<?= site_url('myebook'); ?>">eBooks</a><a href="<?= site_url('about'); ?>">About Us</a><a href="<?= site_url('contact'); ?>">Contact</a></div></nav>
 </header>
-
+<div class="book-sidebar-overlay" id="bookSidebarOverlay"></div>
+<aside class="book-sidebar" id="bookSidebar" aria-label="Quick navigation">
+    <div class="sidebar-head"><div class="sidebar-title">Book<span>Spot</span></div><button class="sidebar-close" id="bookSidebarClose" type="button" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sidebar-profile">
+        <?php if($nav_logged_in && $nav_user_image): ?><img class="avatar" id="sidebarProfileImage" src="<?= base_url('uploads/profile/'.rawurlencode($nav_user_image)); ?>" alt="Profile"><?php else: ?><span class="avatar" id="sidebarProfileIcon"><i class="fa-solid fa-user"></i></span><?php endif; ?>
+        <div><strong><?= $nav_logged_in ? html_escape($nav_user_name) : 'Welcome, Reader' ?></strong><span><?= $nav_logged_in ? 'Your BookSpot account' : 'Discover your next book' ?></span></div>
+    </div>
+    <div class="side-group"><div class="side-label">Explore</div>
+        <a class="side-link" href="<?= site_url('home'); ?>"><i class="fa-solid fa-house"></i> Home</a>
+        <a class="side-link" href="<?= site_url('category'); ?>"><i class="fa-solid fa-layer-group"></i> Categories</a>
+        <a class="side-link" href="<?= site_url('myebook'); ?>"><i class="fa-solid fa-book"></i> eBooks</a>
+        <a class="side-link" href="<?= site_url('product/search'); ?>"><i class="fa-solid fa-compass"></i> Discover Books</a>
+    </div>
+    <div class="side-group"><div class="side-label">Account</div>
+        <?php if($nav_logged_in): ?><a class="side-link" href="<?= site_url('profile'); ?>"><i class="fa-regular fa-id-card"></i> My Profile</a><?php endif; ?>
+        <a class="side-link" href="<?= site_url('cart'); ?>"><i class="fa-solid fa-bag-shopping"></i> Cart</a>
+        <a class="side-link" href="<?= site_url('contact'); ?>"><i class="fa-regular fa-envelope"></i> Support</a>
+    </div>
+</aside>
 <script>
-    function toggleUserMenu() {
-        document.getElementById("userDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.closest('.dropbtn')) {
-            let dropdowns = document.getElementsByClassName("dropdown-content");
-            for (let i = 0; i < dropdowns.length; i++) {
-                let openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
+document.addEventListener('DOMContentLoaded',function(){
+ const b=document.getElementById('bookUserBtn'),m=document.getElementById('bookUserMenu');
+ if(b&&m){b.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('show')});document.addEventListener('click',function(e){if(!e.target.closest('.book-user'))m.classList.remove('show')});}
+ const sb=document.getElementById('bookSidebar'),bt=document.getElementById('bookSidebarToggle'),bc=document.getElementById('bookSidebarClose'),ov=document.getElementById('bookSidebarOverlay');
+ function closeSide(){if(sb)sb.classList.remove('open');if(ov)ov.classList.remove('show');document.body.style.overflow='';}
+ function openSide(){if(sb)sb.classList.add('open');if(ov)ov.classList.add('show');}
+ if(bt)bt.addEventListener('click',openSide);if(bc)bc.addEventListener('click',closeSide);if(ov)ov.addEventListener('click',closeSide);
+ document.querySelectorAll('.side-link').forEach(x=>x.addEventListener('click',closeSide));
+});
 </script>
