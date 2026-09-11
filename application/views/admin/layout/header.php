@@ -12,6 +12,87 @@
 <link href="https://cdn.datatables.net/2.3.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/3.2.6/css/buttons.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.bootstrap5.min.css" rel="stylesheet">
+<style id="bookspot-local-icons">
+i.bs-icon-ready{display:inline-flex!important;align-items:center;justify-content:center;font-size:0!important;line-height:1!important;width:1.35em!important;height:1.35em!important;font-style:normal!important;vertical-align:-.16em!important}
+i.bs-icon-ready::before{display:none!important;content:none!important}
+i.bs-icon-ready .bs-local-icon{width:1em!important;height:1em!important;display:block!important;stroke:currentColor!important;fill:none!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+/* Larger, clearer icons on the two primary surfaces. */
+.book-navbar i.bs-icon-ready{width:1.55em!important;height:1.55em!important}
+.book-navbar .book-icon-link i.bs-icon-ready,.book-navbar .book-menu-item i.bs-icon-ready,.book-navbar .side-link i.bs-icon-ready{font-size:19px!important}
+.sidebar-links a i.bs-icon-ready{font-size:23px!important;width:27px!important;height:24px!important}
+.sidebar-toggle i.bs-icon-ready,.tool-btn i.bs-icon-ready,.theme-toggle i.bs-icon-ready{font-size:23px!important;width:25px!important;height:22px!important}
+.ops-icon i.bs-icon-ready,.panel-head>i.bs-icon-ready{font-size:24px!important;width:27px!important;height:23px!important}
+.admin-avatar i.bs-icon-ready{font-size:24px!important;width:28px!important;height:25px!important}
+.trust-icon i.bs-icon-ready,.promo-chip i.bs-icon-ready,.promo-point i.bs-icon-ready{font-size:21px!important;width:24px!important;height:20px!important}
+@media(max-width:575px){.book-navbar .book-icon-link i.bs-icon-ready{font-size:20px!important}}
+</style><script>
+/* BookSpot local icons: renders clean inline SVGs so icons never depend on CDN fonts. */
+(function(){
+const paths={
+'user':'<circle cx="12" cy="8" r="3.2"/><path d="M5 20c.7-3.2 3.2-5 7-5s6.3 1.8 7 5"/>',
+'users':'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 20c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5M14 15c2.7 0 4.5 1.6 5 4"/>',
+'user-plus':'<circle cx="9" cy="8" r="3"/><path d="M3.5 20c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5M18 8v6M15 11h6"/>',
+'home':'<path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-6h6v6"/>',
+'house':'<path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-6h6v6"/>',
+'book':'<path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21z"/><path d="M5 4.5V21M8 6h8"/>',
+'book-open':'<path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H12v18H7.5A3.5 3.5 0 0 0 4 23zM20 5.5A3.5 3.5 0 0 0 16.5 2H12v18h4.5A3.5 3.5 0 0 1 20 23z"/>',
+'search':'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/>',
+'magnifying-glass':'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/>',
+'heart':'<path d="M20.8 8.7c0 5-8.8 10.3-8.8 10.3S3.2 13.7 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z"/>',
+'star':'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/>',
+'cart-shopping':'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2l2.2 11h10.5L20 7H6"/>',
+'bag-shopping':'<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+'basket-shopping':'<path d="M4 10h16l-1.5 10H5.5z"/><path d="M8 10 10 4M16 10l-2-6"/>',
+'camera':'<path d="M4 7h4l1.4-2h5.2L16 7h4v12H4z"/><circle cx="12" cy="13" r="3.5"/>',
+'lock':'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+'envelope':'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',
+'calendar':'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/>',
+'clock':'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+'check':'<path d="m5 12 4 4L19 6"/>',
+'circle-check':'<circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/>',
+'circle-xmark':'<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+'xmark':'<path d="m6 6 12 12M18 6 6 18"/>',
+'bars':'<path d="M4 6h16M4 12h16M4 18h16"/>',
+'chevron-down':'<path d="m6 9 6 6 6-6"/>',
+'arrow-right':'<path d="M4 12h15M13 6l6 6-6 6"/>',
+'arrow-trend-up':'<path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/>',
+'plus':'<path d="M12 5v14M5 12h14"/>',
+'cloud-arrow-up':'<path d="M7 18a5 5 0 0 1 0-10 6 6 0 0 1 11-1 4.5 4.5 0 0 1 0 9H7"/><path d="M12 16V10M9.5 12.5 12 10l2.5 2.5"/>',
+'download':'<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+'print':'<path d="M7 8V3h10v5M6 17H4V9h16v8h-2"/><path d="M7 14h10v7H7z"/>',
+'phone':'<path d="M7 3h3l1 5-2 1c1 3 3 5 6 6l1-2 5 1v3c0 1.1-.9 2-2 2C10.3 19 5 13.7 5 7c0-1.1.9-2 2-2Z"/>',
+'location-dot':'<path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.2"/>',
+'shield-halved':'<path d="M12 3 19 6v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M12 3v18"/>',
+'shield-heart':'<path d="M12 3 19 6v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M8.8 11.2c0-1.5 1.8-2.2 3.2-.8 1.4-1.4 3.2-.7 3.2.8 0 1.7-3.2 3.5-3.2 3.5s-3.2-1.8-3.2-3.5Z"/>',
+'headset':'<path d="M4 13v-1a8 8 0 0 1 16 0v1"/><path d="M4 13h3v6H5a2 2 0 0 1-1-1.7zM20 13h-3v6h2a2 2 0 0 0 1-1.7z"/><path d="M17 19c0 2-2 3-5 3"/>',
+'right-from-bracket':'<path d="M14 4h6v16h-6M11 12h9M16 8l4 4-4 4M4 4v16"/>',
+'right-to-bracket':'<path d="M10 4H4v16h6M8 12h12M16 8l4 4-4 4"/>',
+'compass':'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8z"/>',
+'layer-group':'<path d="m3 8 9-5 9 5-9 5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+'box':'<path d="m4 7 8-4 8 4-8 4zM4 7v10l8 4 8-4V7M12 11v10"/>',
+'boxes-stacked':'<path d="m4 5 6-3 6 3-6 3zM4 5v7l6 3 6-3V5M14 9l6-3 1 1v9l-6 3-1-.5"/>',
+'file-lines':'<path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/>',
+'file-pdf':'<path d="M6 3h8l4 4v14H6zM14 3v5h4M9 17c2-3 2-6 2-8M9 17c2 0 5-1 6-3"/>',
+'file-excel':'<path d="M6 3h8l4 4v14H6zM14 3v5h4M9 11l4 6M13 11l-4 6"/>',
+'receipt':'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6M9 16h3"/>',
+'chart-column':'<path d="M5 20V10M12 20V5M19 20v-8"/>',
+'chart-simple':'<path d="M5 19V13M12 19V7M19 19V10"/>',
+'paper-plane':'<path d="m3 11 18-8-8 18-2-7zM11 14l10-11"/>',
+'bell':'<path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>',
+'file-csv':'<path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/>',
+'copy':'<rect x="8" y="8" width="11" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/>',
+'moon':'<path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/>',
+'sun':'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>',
+'palette':'<path d="M12 3a9 9 0 0 0 0 18h1.5a1.5 1.5 0 0 0 0-3H12a1.5 1.5 0 0 1 0-3h2a7 7 0 0 0 0-14Z"/><circle cx="7.5" cy="10" r="1"/><circle cx="10" cy="6.5" r="1"/><circle cx="14.5" cy="6.5" r="1"/>',
+'truck-fast':'<path d="M3 6h11v10H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>', 'triangle-exclamation':'<path d="M12 4 21 20H3z"/><path d="M12 9v5M12 17h.01"/>', 'user-group':'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 20c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5M14 15c2.7 0 4.5 1.6 5 4"/>', 'cubes-stacked':'<path d="m4 7 8-4 8 4-8 4zM4 7v10l8 4 8-4V7M12 11v10"/>', 'message':'<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/>', 'envelope-open':'<path d="M3 7 12 13 21 7"/><path d="M4 5h16v14H4z"/>', 'circle-info':'<circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7h.01"/>', 'filter':'<path d="M4 6h16M7 12h10M10 18h4"/>', 'eye':'<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/>', 'circle-exclamation':'<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16h.01"/>', 'circle-plus':'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>', 'dollar-sign':'<path d="M12 3v18M16 7c-.8-1-2.1-1.5-4-1.5-2.4 0-4 1.2-4 3s1.4 2.7 4 3.2 4 1.3 4 3.3-1.6 3.5-4 3.5-3.7-.7-4.5-1.8"/>', 'circle-user':'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="9" r="2.5"/><path d="M7.5 18c.8-2.5 2.3-3.7 4.5-3.7s3.7 1.2 4.5 3.7"/>', 'pen':'<path d="m4 20 4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z"/><path d="m13.5 7.5 3 3"/>', 'trash':'<path d="M4 7h16M9 7V4h6v3M7 7l1 14h8l1-14M10 11v6M14 11v6"/>','spinner':'<path d="M12 3a9 9 0 1 0 9 9"/>'
+};
+function key(el){return [...el.classList].find(c=>c.startsWith('fa-')&&!['fa-solid','fa-regular','fa-brands'].includes(c))?.slice(3)||''}
+function render(){document.querySelectorAll('i.fa-solid,i.fa-regular,i.fab').forEach(el=>{if(el.classList.contains('bs-icon-ready'))return;const k=key(el);const d=paths[k]||paths['circle-check'];el.innerHTML='<svg class="bs-local-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+d+'</svg>';el.classList.add('bs-icon-ready');});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+if(window.MutationObserver){new MutationObserver(function(){render();}).observe(document.documentElement,{childList:true,subtree:true});}
+window.BookSpotIcons={render};
+})();
+</script>
 <style>
 :root{
  --sidebar:#dce7f6;--sidebar-deep:#c8d9ee;--sidebar-text:#41577f;--sidebar-muted:#8294b4;
@@ -79,6 +160,18 @@ a{text-decoration:none;color:inherit}.admin-shell{min-height:100vh}
 .sidebar-overlay{display:none}
 @media(max-width:991.98px){.sidebar{width:256px;transform:translateX(-100%);box-shadow:8px 0 28px rgba(20,31,49,.18)}.sidebar.is-open{width:256px;transform:translateX(0)}.main,.sidebar.is-open~.main{margin-left:0}.topbar{padding:0 16px}.hello-text{display:none}.content{padding:18px}.dt-search{justify-content:flex-start;margin-top:5px}.dt-search input{width:100%!important;max-width:260px}.sidebar-overlay{position:fixed;inset:0;background:rgba(11,18,30,.42);z-index:1040}.sidebar-overlay.show{display:block}.sidebar .brand-full,.sidebar .sidebar-menu-title,.sidebar .account-copy,.sidebar .account-badge{display:block}.sidebar .brand{justify-content:flex-start;padding-left:4px}.sidebar .sidebar-links a{justify-content:flex-start}.sidebar .sidebar-links a::after{display:none}.sidebar .brand-mark{background:transparent;box-shadow:none}}
 @media(max-width:575.98px){.content{padding:14px}.top-title{font-size:16px}.theme-toggle{min-width:40px;width:40px;padding:0}.theme-toggle-label{display:none}.topbar-tools{gap:5px}.notice-menu{right:-55px;width:280px}.dt-layout-row{display:flex;flex-wrap:wrap;gap:8px}.dt-length,.dt-search{width:100%}.dt-search input{max-width:none!important}}
+
+/* Offline icon fallback: Font Awesome can be unavailable on local/XAMPP setups. */
+.fa-solid::before,.fa-regular::before{font-family:"Segoe UI Symbol","Arial Unicode MS",sans-serif!important;font-weight:700!important}
+.fa-house::before{content:"⌂"}.fa-book-open::before{content:"▤"}.fa-file-lines::before{content:"▥"}.fa-receipt::before{content:"▧"}.fa-chart-column::before{content:"▥"}.fa-users::before{content:"♟"}.fa-envelope::before{content:"✉"}.fa-id-card::before{content:"▣"}.fa-bars::before{content:"☰"}.fa-bell::before{content:"♢"}.fa-moon::before{content:"☾"}.fa-chevron-down::before{content:"⌄"}.fa-right-from-bracket::before{content:"↪"}.fa-user::before{content:"●"}.fa-check::before{content:"✓"}.fa-camera::before{content:"◉"}.fa-lock::before{content:"◆"}.fa-plus::before{content:"+"}.fa-trash::before{content:"×"}.fa-pen::before{content:"✎"}.fa-search::before{content:"⌕"}.fa-heart::before{content:"♡"}.fa-cart-shopping::before{content:"🛒"}.fa-star::before{content:"★"}.fa-arrow-right::before{content:"→"}.fa-user-plus::before{content:"+"}.fa-right-to-bracket::before{content:"→"}
+</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/icons-fallback.css'); ?>">
+
+<style id="bookspot-admin-polish">
+.product-thumb img,.book-cover img{width:100%!important;height:100%!important;object-fit:contain!important;padding:7px!important;background:#fff!important}
+.ops-icon{width:48px!important;height:48px!important}
+.ops-icon i{font-size:21px!important}
+.admin-table .btn i,.table-card .btn i{font-size:17px!important}
 </style>
 </head>
 <body>
@@ -90,7 +183,7 @@ a{text-decoration:none;color:inherit}.admin-shell{min-height:100vh}
     <span class="brand-mark">B</span><span class="brand-full">Book<span>Spot</span></span>
   </a>
   <div class="account-block">
-    <span class="account-avatar"><?php if($adminImage): ?><img id="sidebarAdminImage" src="<?= base_url($adminImage) ?>" alt="Admin profile"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
+    <span class="account-avatar"><?php if($adminImage): ?><img id="sidebarAdminImage" src="<?= profile_image_url($adminImage, TRUE) ?>" alt="Admin profile" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/profile-placeholder.svg'); ?>';"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
     <div class="account-copy"><div class="account-name"><?= html_escape($admin_username) ?></div><div class="account-email"><?= html_escape($adminEmail) ?></div></div>
     <span class="account-badge">Admin</span>
   </div>
@@ -130,28 +223,17 @@ a{text-decoration:none;color:inherit}.admin-shell{min-height:100vh}
     </div>
     <div class="position-relative">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><i class="fa-solid fa-moon"></i><span class="theme-toggle-label">Dark</span></button>
-      <button class="tool-btn" id="themePaletteBtn" type="button" aria-label="Choose theme color" title="Choose theme color"><i class="fa-solid fa-palette"></i></button>
-      <div class="theme-menu" id="themeMenu">
-        <div class="menu-title">Theme</div>
-        <div class="theme-options">
-          <button class="theme-option" data-theme="indigo"><span class="theme-dot dot-indigo"></span>Indigo</button>
-          <button class="theme-option" data-theme="emerald"><span class="theme-dot dot-emerald"></span>Emerald</button>
-          <button class="theme-option" data-theme="ocean"><span class="theme-dot dot-ocean"></span>Ocean</button>
-          <button class="theme-option" data-theme="rose"><span class="theme-dot dot-rose"></span>Rose</button>
-          <button class="theme-option" data-theme="violet"><span class="theme-dot dot-violet"></span>Violet</button>
-          <button class="theme-option" data-theme="amber"><span class="theme-dot dot-amber"></span>Amber</button>
-        </div>
-      </div>
+div>
     </div>
     <div class="admin-account">
       <button class="admin-user-btn" id="adminUserBtn" type="button">
         <span class="hello-text">Hello, <?= html_escape($admin_username) ?></span>
-        <span class="admin-avatar"><?php if($adminImage): ?><img id="adminNavImage" src="<?= base_url($adminImage) ?>" alt="Admin profile"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
+        <span class="admin-avatar"><?php if($adminImage): ?><img id="adminNavImage" src="<?= profile_image_url($adminImage, TRUE) ?>" alt="Admin profile" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/profile-placeholder.svg'); ?>';"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
         <i class="fa-solid fa-chevron-down small text-muted"></i>
       </button>
       <div class="admin-user-menu" id="adminUserMenu">
         <div class="d-flex align-items-center gap-2 px-2 py-2 border-bottom">
-          <span class="admin-avatar" style="width:34px;height:34px;flex:0 0 34px"><?php if($adminImage): ?><img id="adminMenuImage" src="<?= base_url($adminImage) ?>" alt="Admin"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
+          <span class="admin-avatar" style="width:34px;height:34px;flex:0 0 34px"><?php if($adminImage): ?><img id="adminMenuImage" src="<?= profile_image_url($adminImage, TRUE) ?>" alt="Admin" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/profile-placeholder.svg'); ?>';"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
           <div style="min-width:0"><div class="fw-semibold small" id="adminMenuName"><?= html_escape($admin_username) ?></div><div class="text-muted" style="font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:145px"><?= html_escape($adminEmail) ?></div></div>
         </div>
         <a href="<?= site_url('admin/profile') ?>"><i class="fa-regular fa-id-card"></i> My Profile</a>

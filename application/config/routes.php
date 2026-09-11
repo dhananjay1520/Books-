@@ -29,5 +29,20 @@ $route['profile'] = 'profile/index';
 $route['profile/upload_image'] = 'profile/upload_image';
 $route['profile/update_account'] = 'profile/update_account';
 
+
+// Cart / checkout / browse routes
+$route['cart'] = 'cart/index';
+$route['cart/add'] = 'cart/add';
+$route['cart/update'] = 'cart/update';
+$route['cart/remove/(:num)/(:any)'] = 'cart/remove/$1/$2';
+$route['cart/clear'] = 'cart/clear';
+$route['checkout'] = 'checkout/index';
+$route['rent'] = 'rent/index';
+$route['rent/(:num)'] = 'rent/index/$1';
+$route['rent/save'] = 'rent/save';
+$route['payment/success'] = 'checkout/success';
+$route['category'] = 'filter/index';
+$route['filter'] = 'filter/index';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -162,16 +162,19 @@
                 <div class="product-description" id="description">
                     <?php echo nl2br(htmlspecialchars($product['pr_desc'])); ?>
                 </div>
-                <span class="read-more" id="read-more">Read More <i class="fas fa-chevron-down" style="font-size:12px;"></i></span>
+                <span class="read-more" id="read-more">Read More <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i></span>
             </div>
 
             <div class="button-container">
                 <button class="button btn-add-cart" data-id="<?php echo htmlspecialchars($product['id']); ?>">
-                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
                 </button>
-                <a href="<?= site_url('payment/gateway/' . $product['id']); ?>" class="button btn-buy-now">
-                    <i class="fas fa-bolt"></i> Buy Now
+                <a href="<?= site_url('rent/' . $product['id']); ?>" class="button" style="background:#fff;color:#5b4bdb;border:1px solid #d9d5ff;box-shadow:none;">
+                    <i class="fa-solid fa-book-open"></i> Rent Book
                 </a>
+                <button type="button" class="button btn-buy-now" data-id="<?php echo htmlspecialchars($product['id']); ?>">
+                    <i class="fa-solid fa-bolt"></i> Buy Now
+                </button>
             </div>
         </div>
 
@@ -192,11 +195,51 @@ document.addEventListener("DOMContentLoaded", function() {
     readMore.addEventListener("click", function() {
         if (description.style.webkitLineClamp === "none") {
             description.style.webkitLineClamp = "4";
-            readMore.innerHTML = 'Read More <i class="fas fa-chevron-down" style="font-size:12px;"></i>';
+            readMore.innerHTML = 'Read More <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>';
         } else {
             description.style.webkitLineClamp = "none";
-            readMore.innerHTML = 'Show Less <i class="fas fa-chevron-up" style="font-size:12px;"></i>';
+            readMore.innerHTML = 'Show Less <i class="fa-solid fa-chevron-up" style="font-size:12px;"></i>';
         }
     });
+
+    const productId = <?= (int)$product['id'] ?>;
+    const cartUrl = <?= json_encode(site_url('cart/add')) ?>;
+    const checkoutUrl = <?= json_encode(site_url('checkout')) ?>;
+    const cartButton = document.querySelector('.btn-add-cart');
+    const buyButton = document.querySelector('.btn-buy-now');
+
+    function addProduct(button, goCheckout) {
+        if (!button || button.disabled) return;
+        const original = button.innerHTML;
+        button.disabled = true;
+        button.innerHTML = 'Adding…';
+        fetch(cartUrl, {
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8','X-Requested-With':'XMLHttpRequest'},
+            body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.redirect) { window.location.href = data.redirect; return; }
+            if (!data.success) throw new Error(data.message || 'Unable to add this book.');
+            const count = document.getElementById('cartCount');
+            if (count) count.textContent = data.cart_count;
+            if (goCheckout) {
+                window.location.href = checkoutUrl;
+                return;
+            }
+            button.innerHTML = '<i class="fa-solid fa-check"></i> Added to Cart';
+            button.style.background = '#179362';
+            setTimeout(() => { button.innerHTML = original; button.disabled = false; button.style.background = ''; }, 1800);
+        })
+        .catch(err => {
+            alert(err.message);
+            button.innerHTML = original;
+            button.disabled = false;
+        });
+    }
+
+    if (cartButton) cartButton.addEventListener('click', () => addProduct(cartButton, false));
+    if (buyButton) buyButton.addEventListener('click', () => addProduct(buyButton, true));
 });
 </script>

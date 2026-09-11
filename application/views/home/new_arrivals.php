@@ -51,7 +51,7 @@
                             <button class="bs-heart" type="button" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
                             <button type="button" class="bs-rent" onclick="openRentPopup('<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>','<?= htmlspecialchars($product['pr_name'], ENT_QUOTES, 'UTF-8'); ?>','<?= htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>')">Rent</button>
                             <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link">
-                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" alt="<?= html_escape($product['pr_name']); ?>">
+                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';" alt="<?= html_escape($product['pr_name']); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';">
                             </a>
                         </div>
                         <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link" style="text-decoration:none;color:inherit">

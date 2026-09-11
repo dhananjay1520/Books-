@@ -46,7 +46,7 @@
                             <span style="position:absolute;left:15px;top:15px;background:#ef3f22;color:#fff;border-radius:0 16px 16px 0;padding:5px 10px;font-size:10px;font-weight:800;z-index:2">TOP PICK</span>
                             <button class="bs-heart" type="button" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
                             <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link">
-                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" alt="<?= html_escape($product['pr_name']); ?>">
+                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';" alt="<?= html_escape($product['pr_name']); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';">
                             </a>
                         </div>
                         <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link" style="text-decoration:none;color:inherit">

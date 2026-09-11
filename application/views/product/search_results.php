@@ -97,6 +97,8 @@ $(document).ready(function() {
                 if (data.success) {
                     $('#successPopup').fadeIn();
                     form.find('button').text('Added to Cart').prop('disabled', true);
+                    var cartCount = document.getElementById('cartCount');
+                    if (cartCount && data.cart_count !== undefined) cartCount.textContent = data.cart_count;
 
                     setTimeout(function() {
                         $('#successPopup').fadeOut();

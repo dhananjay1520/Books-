@@ -93,14 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Theme mode + accent palette.
     const savedMode = localStorage.getItem('bookspot-admin-mode') || 'light';
-    const savedAccent = localStorage.getItem('bookspot-admin-theme') || 'indigo';
     if (savedMode === 'dark') body.classList.add('theme-dark');
-    ['emerald', 'ocean', 'rose', 'violet', 'amber'].forEach(function (name) {
-        body.classList.remove('theme-' + name);
-    });
-    if (['emerald', 'ocean', 'rose', 'violet', 'amber'].indexOf(savedAccent) !== -1) {
-        body.classList.add('theme-' + savedAccent);
-    }
 
     function syncTheme() {
         if (!themeToggle) return;
@@ -120,42 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
         syncTheme();
     });
 
-    const themePaletteBtn = document.getElementById('themePaletteBtn');
-    themePaletteBtn && themePaletteBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        themeMenu && themeMenu.classList.toggle('show');
-        userMenu && userMenu.classList.remove('show');
-        noticeMenu && noticeMenu.classList.remove('show');
-    });
-
-    themeMenu && themeMenu.querySelectorAll('.theme-option').forEach(function (option) {
-        option.addEventListener('click', function (e) {
-            e.stopPropagation();
-            ['emerald', 'ocean', 'rose', 'violet', 'amber'].forEach(function (name) {
-                body.classList.remove('theme-' + name);
-            });
-            const name = option.dataset.theme || 'indigo';
-            if (['emerald', 'ocean', 'rose', 'violet', 'amber'].indexOf(name) !== -1) {
-                body.classList.add('theme-' + name);
-            }
-            localStorage.setItem('bookspot-admin-theme', name);
-            themeMenu && themeMenu.classList.remove('show');
-        });
-    });
-
-    // User / notification menus.
-    userBtn && userBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        userMenu && userMenu.classList.toggle('show');
-        noticeMenu && noticeMenu.classList.remove('show');
-        themeMenu && themeMenu.classList.remove('show');
-    });
-    noticeBtn && noticeBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        noticeMenu && noticeMenu.classList.toggle('show');
-        userMenu && userMenu.classList.remove('show');
-        themeMenu && themeMenu.classList.remove('show');
-    });
     document.addEventListener('click', function () {
         userMenu && userMenu.classList.remove('show');
         noticeMenu && noticeMenu.classList.remove('show');
@@ -191,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     text: '<i class="fa-solid fa-download"></i> Export',
                                     buttons: [
                                         { extend: 'copy', text: '<i class="fa-regular fa-copy"></i> Copy', exportOptions: { columns: ':visible' } },
-                                        { extend: 'csv', text: '<i class="fa-solid fa-file-csv"></i> CSV', exportOptions: { columns: ':visible' } },
                                         { extend: 'excel', text: '<i class="fa-regular fa-file-excel"></i> Excel', exportOptions: { columns: ':visible' } },
                                         { extend: 'pdf', text: '<i class="fa-regular fa-file-pdf"></i> PDF', exportOptions: { columns: ':visible' }, orientation: 'landscape', pageSize: 'A4' },
                                         { extend: 'print', text: '<i class="fa-solid fa-print"></i> Print', exportOptions: { columns: ':visible' } }

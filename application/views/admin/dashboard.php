@@ -1,3 +1,4 @@
+<style id="bookspot-human-admin-final">.dashboard-hero{background:linear-gradient(135deg,#fff 0%,#f4f5ff 100%)!important;border:1px solid #e7e9f1!important;box-shadow:0 12px 30px rgba(31,45,73,.05)!important}.ops-card{border:1px solid #e5e8f0!important;box-shadow:0 8px 22px rgba(31,45,73,.055)!important;transition:transform .2s,box-shadow .2s!important}.ops-card:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(31,45,73,.09)!important}.ops-icon{width:56px!important;height:56px!important;border-radius:16px!important}.panel{border:1px solid #e4e8f0!important;box-shadow:0 8px 22px rgba(31,45,73,.045)!important}.list-avatar,.book-cover{width:48px!important;height:48px!important;border-radius:13px!important}.sidebar-links a{height:48px!important}.tool-btn,.sidebar-toggle{width:46px!important;height:46px!important}.theme-toggle{min-height:46px!important}.admin-user-btn{min-height:46px!important}.priority-card{border-radius:20px!important}</style>
 <?php
 $inv = $inventory_summary ?? ['total_stock_units'=>0,'low_stock'=>0,'out_of_stock'=>0,'total_ebooks'=>0];
 $stats = $stats ?? [];
@@ -38,7 +39,7 @@ $recentMessages = $recent_messages ?? [];
         <?php if ($lowStock): foreach ($lowStock as $book): ?>
             <div class="list-row">
                 <div class="list-left">
-                    <span class="book-cover"><?php if(!empty($book->image)): ?><img src="<?= product_image_url($book->image) ?>" alt="Book cover"><?php else: ?><i class="fa-solid fa-book"></i><?php endif; ?></span>
+                    <span class="book-cover"><?php if(!empty($book->image)): ?><img src="<?= product_image_url($book->image) ?>" alt="Book cover" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg') ?>';"><?php else: ?><i class="fa-solid fa-book"></i><?php endif; ?></span>
                     <div><div class="list-name"><?= html_escape($book->pr_name) ?></div><div class="list-meta"><?= html_escape($book->pr_cate ?: 'Uncategorized') ?></div></div>
                 </div>
                 <span class="stock-pill <?= ((int)$book->pr_qty <= 0) ? 'stock-out' : 'stock-low' ?>"><?= ((int)$book->pr_qty <= 0) ? 'Out of stock' : ((int)$book->pr_qty . ' left') ?></span>
@@ -53,7 +54,7 @@ $recentMessages = $recent_messages ?? [];
         <?php if ($recentUsers): foreach ($recentUsers as $u): ?>
             <div class="list-row">
                 <div class="list-left">
-                    <span class="list-avatar"><?php if(!empty($u->image)): ?><img src="<?= product_image_url($u->image) ?>" alt="Customer"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
+                    <span class="list-avatar"><?php if(!empty($u->image)): ?><img src="<?= profile_image_url($u->image) ?>" alt="Customer" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/profile-placeholder.svg') ?>';"><?php else: ?><i class="fa-solid fa-user"></i><?php endif; ?></span>
                     <div><div class="list-name"><?= html_escape($u->name) ?></div><div class="list-meta"><?= html_escape($u->email) ?></div></div>
                 </div>
                 <span class="text-muted" style="font-size:10px">#<?= (int)$u->id ?></span>
