@@ -1,0 +1,16 @@
+BOOKSPOT FINAL SETUP
+
+1. Extract this ZIP directly to C:\xampp\htdocs\book\
+2. Confirm index.php, application, system, assets and uploads are inside the book folder.
+3. Open http://localhost/book/
+4. Do not open /application directly; it is intentionally protected.
+5. Only wishlist.sql is included as an optional SQL reference. Previous project SQL files were removed.
+
+MAIN FIXES
+- Permanent image path resolver; no preg_replace delimiter crash.
+- Missing images fall back to assets/uploads/placeholder-book.svg.
+- Product details redesigned with actions and related books.
+- Dedicated Rent a Book shelf on Home plus Rent page.
+- Wishlist toggle/count and product-details wishlist state synchronized.
+- Standard Bootstrap/DataTables appearance; no CSV/export toolbar.
+- Home trust cards are centered.

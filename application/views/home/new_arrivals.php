@@ -51,14 +51,14 @@
                             <button class="bs-heart wishlist-toggle <?= !empty($wishlistStatusNewArrivals[$product['id']]) ? 'is-wishlisted' : ''; ?>" type="button" data-product-id="<?= (int)$product['id']; ?>" aria-label="<?= !empty($wishlistStatusNewArrivals[$product['id']]) ? 'Remove from wishlist' : 'Add to wishlist'; ?>" aria-pressed="<?= !empty($wishlistStatusNewArrivals[$product['id']]) ? 'true' : 'false'; ?>"><i class="<?= !empty($wishlistStatusNewArrivals[$product['id']]) ? 'fa-solid' : 'fa-regular'; ?> fa-heart"></i></button>
                             <button type="button" class="bs-rent" onclick="openRentPopup('<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>','<?= htmlspecialchars($product['pr_name'], ENT_QUOTES, 'UTF-8'); ?>','<?= htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>')">Rent</button>
                             <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link">
-                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';" alt="<?= html_escape($product['pr_name']); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';">
+                                <img class="bs-card-image" src="<?= html_escape(product_image_url($product['image'])); ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';" alt="<?= html_escape($product['pr_name']); ?>">
                             </a>
                         </div>
                         <a href="<?= site_url('product/details/' . $product['id']); ?>" class="bs-card-link" style="text-decoration:none;color:inherit">
                             <div class="bs-card-name"><?= html_escape($product['pr_name']); ?></div>
                             <div class="bs-card-meta">by <?= html_escape($product['pr_author_name']); ?></div>
                         </a>
-                        <div class="bs-price-row"><span class="bs-price">₹ <?= html_escape($product['pr_price']); ?></span></div>
+                        <div class="bs-price-row"><span class="bs-price">₹ <?= html_escape($product['pr_price']); ?></span></div><a class="bs-view-book" href="<?= site_url('product/details/' . $product['id']); ?>">View Details <i class="fa-solid fa-arrow-right"></i></a>
                         <?php if (!empty($cartStatusNewArrivals[$product['id']])): ?>
                             <a class="bs-cart-btn bs-go-cart" href="<?= site_url('cart'); ?>"><i class="fa-solid fa-bag-shopping"></i> Go To Cart</a>
                         <?php else: ?>

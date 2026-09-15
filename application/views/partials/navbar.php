@@ -1,7 +1,5 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/bookspot-icons.css'); ?>">
 <style>
-/* Local icon fallback: public pages remain usable even when Font Awesome CDN is blocked. */
-.fa-solid,.fa-regular,.fab{font-family:"Segoe UI Symbol","Arial Unicode MS",sans-serif!important;font-style:normal!important;font-weight:700!important;display:inline-block;line-height:1}
-.fa-bars::before{content:"☰"}.fa-magnifying-glass::before{content:"⌕"}.fa-bag-shopping::before{content:"🛍"}.fa-user::before{content:"●"}.fa-chevron-down::before{content:"⌄"}.fa-id-card::before{content:"▣"}.fa-right-from-bracket::before{content:"↪"}.fa-right-to-bracket::before{content:"→"}.fa-user-plus::before{content:"+"}.fa-xmark::before{content:"×"}.fa-house::before{content:"⌂"}.fa-layer-group::before{content:"▤"}.fa-book::before{content:"▤"}.fa-compass::before{content:"◉"}.fa-envelope::before{content:"✉"}.fa-star::before{content:"★"}.fa-heart::before{content:"♡"}.fa-cart-shopping::before{content:"🛒"}.fa-check::before{content:"✓"}.fa-arrow-right::before{content:"→"}.fa-bolt::before{content:"⚡"}.fa-book-open::before{content:"▤"}.fa-book-open-reader::before{content:"▤"}.fa-shield-halved::before{content:"◆"}.fa-truck-fast::before{content:"▸"}.fa-headset::before{content:"◉"}.fa-camera::before{content:"◉"}.fa-chevron-down::before{content:"⌄"}.fa-lock::before{content:"◆"}.fa-arrow-left::before{content:"←"}.fa-trash-can::before{content:"⌫"}.fa-circle-check::before{content:"✓"}.fa-chevron-up::before{content:"⌃"}.fa-calendar::before{content:"□"}
 :root{--bs-brand:#5b4bdb;--bs-brand-2:#7c6cf3;--bs-ink:#182033;--bs-muted:#6b7280;--bs-line:#e7eaf0;--bs-soft:#f6f7fb;--bs-dark:#111827}
 .book-navbar{position:sticky;top:0;z-index:1500;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bs-line);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 .book-top{min-height:76px;display:flex;align-items:center;gap:16px;padding:0 4%;max-width:1440px;margin:auto}.book-menu-toggle{width:42px;height:42px;border:1px solid var(--bs-line);background:#fff;border-radius:12px;color:var(--bs-ink);display:grid;place-items:center;cursor:pointer;transition:.2s}.book-menu-toggle:hover{color:var(--bs-brand);border-color:#cfc9ff;background:#faf9ff}.book-logo{font-size:27px;font-weight:800;text-decoration:none;color:var(--bs-ink);letter-spacing:-.04em;white-space:nowrap}.book-logo span{color:var(--bs-brand)}.book-search{position:relative;flex:1;max-width:520px;margin-left:auto}.book-search input{width:100%;border:1px solid var(--bs-line);background:#f8f9fc;border-radius:14px;padding:12px 16px 12px 44px;font-size:13px;outline:none;transition:.2s;box-sizing:border-box}.book-search input:focus{border-color:#c8c2ff;background:#fff;box-shadow:0 0 0 4px rgba(91,75,219,.08)}.book-search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8b93a5;font-size:14px}.book-actions{display:flex;align-items:center;gap:8px;margin-left:auto}.book-icon-link,.book-user-btn{position:relative;width:42px;height:42px;border:0;background:transparent;display:grid;place-items:center;color:#4b5563;text-decoration:none;border-radius:12px;cursor:pointer}.book-icon-link:hover,.book-user-btn:hover{background:#f4f2ff;color:var(--bs-brand)}.book-cart-count{position:absolute;top:0;right:-1px;background:#ef476f;color:#fff;border-radius:999px;font-size:9px;line-height:16px;min-width:16px;height:16px;text-align:center;border:2px solid #fff}.book-user{position:relative}.book-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 2px 8px rgba(23,32,51,.12)}.book-avatar-fallback{background:#ece9ff;color:var(--bs-brand);display:grid;place-items:center;font-size:15px}.book-user-chevron{font-size:9px;margin-left:2px;color:#7a8495}.book-user-menu{display:none;position:absolute;right:0;top:50px;width:250px;background:#fff;border:1px solid var(--bs-line);border-radius:16px;box-shadow:0 22px 50px rgba(23,32,51,.16);padding:8px}.book-user-menu.show{display:block}.book-menu-head{display:flex;align-items:center;gap:11px;padding:11px 10px 13px;border-bottom:1px solid #eef0f4;margin-bottom:5px}.mini-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#ece9ff;color:var(--bs-brand);display:grid;place-items:center}.book-menu-name{font-size:13px;font-weight:700;color:var(--bs-ink)}.book-menu-email{font-size:11px;color:var(--bs-muted);margin-top:2px;word-break:break-word}.book-menu-item{display:flex;align-items:center;gap:11px;color:#384152;text-decoration:none;padding:11px;border-radius:10px;font-size:13px}.book-menu-item:hover{background:var(--bs-soft);color:var(--bs-brand)}.book-menu-item.logout{color:#dc4c64;border-top:1px solid #eef0f4;border-radius:0 0 10px 10px;margin-top:4px;padding-top:13px}.book-nav{border-top:1px solid #f2f3f6}.book-nav-inner{display:flex;align-items:center;gap:30px;padding:0 4%;height:46px;max-width:1440px;margin:auto}.book-nav a{font-size:13px;font-weight:650;color:#667085;text-decoration:none;position:relative;height:46px;display:flex;align-items:center}.book-nav a:hover{color:var(--bs-brand)}.book-nav a:after{content:'';position:absolute;height:2px;width:0;left:0;bottom:0;background:var(--bs-brand);transition:.2s}.book-nav a:hover:after{width:100%}
@@ -122,7 +120,7 @@ window.BookSpotIcons={render};
             </div>
         </div>
     </div>
-    <nav class="book-nav"><div class="book-nav-inner"><a href="<?= site_url('home'); ?>">Home</a><a href="<?= site_url('category'); ?>">Categories</a><a href="<?= site_url('myebook'); ?>">eBooks</a><a href="<?= site_url('about'); ?>">About Us</a><a href="<?= site_url('contact'); ?>">Contact</a></div></nav>
+    <nav class="book-nav"><div class="book-nav-inner"><a href="<?= site_url('home'); ?>">Home</a><a href="<?= site_url('category'); ?>">Categories</a><a href="<?= site_url('myebook'); ?>">eBooks</a><a href="<?= site_url('rent'); ?>">Rent</a><a href="<?= site_url('about'); ?>">About Us</a><a href="<?= site_url('contact'); ?>">Contact</a></div></nav>
 </header>
 <div class="book-sidebar-overlay" id="bookSidebarOverlay"></div>
 <aside class="book-sidebar" id="bookSidebar" aria-label="Quick navigation">
@@ -135,6 +133,7 @@ window.BookSpotIcons={render};
         <a class="side-link" href="<?= site_url('home'); ?>"><i class="fa-solid fa-house"></i> Home</a>
         <a class="side-link" href="<?= site_url('category'); ?>"><i class="fa-solid fa-layer-group"></i> Categories</a>
         <a class="side-link" href="<?= site_url('myebook'); ?>"><i class="fa-solid fa-book"></i> eBooks</a>
+        <a class="side-link" href="<?= site_url('rent'); ?>"><i class="fa-solid fa-book-open"></i> Rent a Book</a>
         <a class="side-link" href="<?= site_url('product/search'); ?>"><i class="fa-solid fa-compass"></i> Discover Books</a>
     </div>
     <div class="side-group"><div class="side-label">Account</div>
@@ -144,6 +143,7 @@ window.BookSpotIcons={render};
         <a class="side-link" href="<?= site_url('contact'); ?>"><i class="fa-regular fa-envelope"></i> Support</a>
     </div>
 </aside>
+<script src="<?= base_url('assets/js/bookspot-icons.js'); ?>"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
  const b=document.getElementById('bookUserBtn'),m=document.getElementById('bookUserMenu');
@@ -173,6 +173,7 @@ document.addEventListener('DOMContentLoaded',function(){
          el.setAttribute('aria-label', data.added ? 'Remove from wishlist' : 'Add to wishlist');
        });
        document.querySelectorAll('#wishlistCount,.wishlist-count-side').forEach(function(el){el.textContent=data.wishlist_count;});
+       document.dispatchEvent(new CustomEvent('wishlist:updated',{detail:{productId:Number(productId),added:!!data.added,count:Number(data.wishlist_count)}}));
      }).catch(function(err){ alert(err.message||'Could not update wishlist.'); })
      .finally(function(){btn.disabled=false;});
  });

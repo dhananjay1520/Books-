@@ -29,7 +29,7 @@ p.p {
                 <?php foreach ($products as $product): ?>
                     <div class="product-card" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="position:relative"><button class="wishlist-toggle search-wish <?= isset($wishlistStatus[(int)$product['id']]) ? 'is-wishlisted' : ''; ?>" type="button" data-product-id="<?= (int)$product['id']; ?>" aria-label="<?= isset($wishlistStatus[(int)$product['id']]) ? 'Remove from wishlist' : 'Add to wishlist'; ?>" aria-pressed="<?= isset($wishlistStatus[(int)$product['id']]) ? 'true' : 'false'; ?>"><i class="<?= isset($wishlistStatus[(int)$product['id']]) ? 'fa-solid' : 'fa-regular'; ?> fa-heart"></i></button>
                         <a href="<?= site_url('product/details/' . $product['id']); ?>" class="product-link">
-                            <img src="<?php echo html_escape(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image">
+                            <img src="<?php echo html_escape(product_image_url($product['image'])); ?>" alt="<?php echo htmlspecialchars($product['pr_name']); ?>" class="product-image" loading="lazy" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';">
                             <div class="product-info">
                                 <div class="product-name"><?php echo htmlspecialchars($product['pr_name']); ?></div>
                                 <div class="product-author">by <?php echo htmlspecialchars($product['pr_author_name']); ?></div>

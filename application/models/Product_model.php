@@ -98,6 +98,18 @@ class Product_model extends CI_Model {
         return $query->row_array(); // false agar nahi mila
     }
 
+    public function get_related_products($category, $exclude_id, $limit = 4) {
+        $this->db->select('*')->from('products')->where('id !=', (int)$exclude_id);
+        if ($category !== '' && $category !== null) $this->db->where('pr_cate', $category);
+        $this->db->order_by('id', 'DESC')->limit((int)$limit);
+        return $this->db->get()->result_array();
+    }
+
+    public function get_rent_picks($limit = 6) {
+        $this->db->select('*')->from('products')->order_by('is_newarrival', 'DESC')->order_by('id', 'DESC')->limit((int)$limit);
+        return $this->db->get()->result_array();
+    }
+
     public function get_products_by_ids($ids) {
         $ids = array_values(array_filter(array_map('intval', (array)$ids)));
         if (empty($ids)) return array();

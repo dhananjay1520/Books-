@@ -43,7 +43,7 @@
       <?php foreach ($books as $book): ?>
         <article class="book-card" style="position:relative">
           <button class="wishlist-toggle bs-filter-heart <?= isset($wishlistStatus[(int)$book['id']]) ? 'is-wishlisted' : ''; ?>" type="button" data-product-id="<?= (int)$book['id']; ?>" aria-label="<?= isset($wishlistStatus[(int)$book['id']]) ? 'Remove from wishlist' : 'Add to wishlist'; ?>" aria-pressed="<?= isset($wishlistStatus[(int)$book['id']]) ? 'true' : 'false'; ?>"><i class="<?= isset($wishlistStatus[(int)$book['id']]) ? 'fa-solid' : 'fa-regular'; ?> fa-heart"></i></button>
-          <div class="book-cover"><img src="<?= book_image_url($book['image']) ?>" alt="<?= html_escape($book['pr_name']) ?>"></div>
+          <div class="book-cover" loading="lazy" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg'); ?>';"><img src="<?= book_image_url($book['image']) ?>" alt="<?= html_escape($book['pr_name']) ?>"></div>
           <div class="book-card-body">
             <h3><?= html_escape($book['pr_name']) ?></h3>
             <div class="book-price">₹<?= number_format((float)$book['pr_price'], 2) ?></div>

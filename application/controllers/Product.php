@@ -86,6 +86,13 @@ class Product extends CI_Controller {
             $data['cartCount'] = $this->Product_model->get_cart_count($user_id);
         }
 
+        $wish = $this->session->userdata('wishlist_ids');
+        if (!is_array($wish)) $wish = array();
+        $wish = array_flip(array_map('intval', $wish));
+        $data['wishlistStatus'] = $wish;
+        $data['wishlistCount'] = count($wish);
+        $data['relatedProducts'] = $this->Product_model->get_related_products($data['product']['pr_cate'] ?? '', (int)$data['product']['id'], 4);
+
         $this->load->view('partials/navbar', $data);
         $this->load->view('product/details', $data);
         $this->load->view('partials/footer');

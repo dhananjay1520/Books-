@@ -77,7 +77,6 @@ body{background:var(--bs-admin-bg)}
 .bg-primary{background:var(--bs-admin-accent)!important}
 .form-control,.form-select{border-color:#dfe6ee!important;border-radius:10px!important;min-height:42px!important}
 .form-control:focus,.form-select:focus{border-color:#9ed8cb!important;box-shadow:0 0 0 .2rem rgba(22,160,133,.12)!important}
-.dt-buttons .dt-button{border-radius:9px!important}
 .dt-search input{border-radius:10px!important}
 .admin-user-menu,.notice-menu{border-color:var(--bs-admin-border)!important;box-shadow:0 18px 40px rgba(22,32,51,.12)!important}
 .theme-toggle-label{font-weight:700!important}

@@ -34,6 +34,7 @@ class Home extends CI_Controller {
         $data['products']     = $this->Product_model->get_all_products();
         $data['bestsellers']  = $this->Product_model->get_bestsellers();
         $data['new_arrivals'] = $this->Product_model->get_new_arrivals();
+        $data['rent_picks'] = $this->Product_model->get_rent_picks(6);
 
         // cart count for logged-in user
         if ($data['loggedIn'] && $user_id) {
@@ -49,6 +50,8 @@ class Home extends CI_Controller {
         $wish_ids = array_flip(array_map('intval', $wish_ids));
         $data['wishlistStatusBestsellers'] = $this->build_wishlist_status($data['bestsellers'], $wish_ids);
         $data['wishlistStatusNewArrivals'] = $this->build_wishlist_status($data['new_arrivals'], $wish_ids);
+        $data['wishlistStatusRentPicks'] = $this->build_wishlist_status($data['rent_picks'], $wish_ids);
+        $data['wishlistCount'] = count($wish_ids);
 
         // navbar/footer partials bhi yahin se pass ho jayenge
         $this->load->view('partials/navbar', $data);

@@ -7,7 +7,7 @@ class Filter extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Filter_model');
-        $this->load->helper(array('url', 'security'));
+        $this->load->helper(array('url', 'security', 'product', 'image'));
         $this->load->library('session');
         $this->load->model('Product_model');
     }

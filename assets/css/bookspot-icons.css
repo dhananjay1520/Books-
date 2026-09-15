@@ -1,0 +1,5 @@
+/* BookSpot local icons */
+i.bs-icon-ready{display:inline-flex!important;align-items:center;justify-content:center;font-size:0!important;line-height:1!important;width:1.35em!important;height:1.35em!important;font-style:normal!important;vertical-align:-.16em!important;color:inherit!important}
+i.bs-icon-ready::before{display:none!important;content:none!important}
+i.bs-icon-ready .bs-local-icon{width:1em!important;height:1em!important;display:block!important;stroke:currentColor!important;fill:none!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.bs-icon-lg{width:1.5em!important;height:1.5em!important}
