@@ -6,7 +6,7 @@ class Cart_model extends CI_Model
     public function get_items($user_id)
     {
         $sql = "
-            SELECT c.id, p.pr_name AS name, p.image AS image,
+            SELECT c.id, c.product_id, p.pr_name AS name, p.image AS image,
                    p.pr_price AS price, c.quantity,
                    NULL AS start_date, NULL AS end_date, 'cart' AS item_type
             FROM add_to_cart c
@@ -15,7 +15,7 @@ class Cart_model extends CI_Model
 
             UNION ALL
 
-            SELECT r.id, r.book_name AS name, r.book_image AS image,
+            SELECT r.id, NULL AS product_id, r.book_name AS name, r.book_image AS image,
                    r.total_rent AS price, 1 AS quantity,
                    r.start_date, r.end_date, 'rent' AS item_type
             FROM rent r
@@ -60,6 +60,17 @@ class Cart_model extends CI_Model
             'product_id' => $product_id,
             'quantity' => $quantity
         ));
+    }
+
+
+    public function get_item_quantity($user_id, $id)
+    {
+        $row = $this->db->select('quantity')
+            ->where('id', $id)
+            ->where('user_id', $user_id)
+            ->get('add_to_cart')->row_array();
+
+        return $row ? (int)$row['quantity'] : 1;
     }
 
     public function update_quantity($user_id, $id, $quantity)

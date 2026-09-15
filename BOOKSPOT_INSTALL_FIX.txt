@@ -1,0 +1,19 @@
+BOOKSPOT - FORBIDDEN ERROR FIX
+
+Use the project root folder (the folder containing index.php), NOT the application folder, as your Apache project folder.
+
+Correct location:
+C:\xampp\htdocs\bookspot_final_full\index.php
+C:\xampp\htdocs\bookspot_final_full\application\
+C:\xampp\htdocs\bookspot_final_full\system\
+C:\xampp\htdocs\bookspot_final_full\assets\
+
+Do NOT make application\ the Apache document root. application\.htaccess intentionally denies direct web access for security.
+
+For XAMPP:
+1. Extract this whole folder into C:\xampp\htdocs\
+2. Rename folder to book if needed.
+3. Start Apache and MySQL.
+4. Open: http://localhost/bookspot_final_full/
+   or: http://localhost/book/ (if renamed to book)
+5. If the project was previously inside another folder, update base_url in application/config/config.php.

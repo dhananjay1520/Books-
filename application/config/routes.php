@@ -29,6 +29,12 @@ $route['profile'] = 'profile/index';
 $route['profile/upload_image'] = 'profile/upload_image';
 $route['profile/update_account'] = 'profile/update_account';
 
+// Wishlist
+$route['wishlist'] = 'wishlist/index';
+$route['wishlist/toggle'] = 'wishlist/toggle';
+$route['wishlist/remove/(:num)'] = 'wishlist/remove/$1';
+$route['wishlist/clear'] = 'wishlist/clear';
+
 
 // Cart / checkout / browse routes
 $route['cart'] = 'cart/index';

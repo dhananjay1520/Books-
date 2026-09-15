@@ -99,6 +99,8 @@ window.BookSpotIcons={render};
         <form action="<?= site_url('product/search'); ?>" method="GET" class="book-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" name="query" placeholder="Search books, authors..." required aria-label="Search books"></form>
         <div class="book-actions">
             <a href="<?= site_url('cart'); ?>" class="book-icon-link" aria-label="Shopping cart"><i class="fa-solid fa-bag-shopping"></i><span class="book-cart-count" id="cartCount"><?php echo isset($cartCount) ? htmlspecialchars($cartCount) : '0'; ?></span></a>
+            <?php $nav_wishlist_ids = $this->session->userdata('wishlist_ids'); if (!is_array($nav_wishlist_ids)) $nav_wishlist_ids = array(); $nav_wishlist_ids = array_values(array_filter(array_map('intval', $nav_wishlist_ids))); ?>
+            <a href="<?= site_url('wishlist'); ?>" class="book-icon-link" aria-label="Wishlist"><i class="fa-solid fa-heart"></i><span class="book-cart-count wishlist-count" id="wishlistCount"><?php echo count($nav_wishlist_ids); ?></span></a>
             <?php $nav_logged_in=(bool)$this->session->userdata('login'); $nav_user_name=(string)$this->session->userdata('name'); $nav_user_email=(string)$this->session->userdata('email'); $nav_user_image=(string)$this->session->userdata('image'); ?>
             <div class="book-user">
                 <button class="book-user-btn" id="bookUserBtn" type="button" aria-label="Account menu">
@@ -138,6 +140,7 @@ window.BookSpotIcons={render};
     <div class="side-group"><div class="side-label">Account</div>
         <?php if($nav_logged_in): ?><a class="side-link" href="<?= site_url('profile'); ?>"><i class="fa-regular fa-id-card"></i> My Profile</a><?php endif; ?>
         <a class="side-link" href="<?= site_url('cart'); ?>"><i class="fa-solid fa-bag-shopping"></i> Cart</a>
+        <a class="side-link" href="<?= site_url('wishlist'); ?>"><i class="fa-solid fa-heart"></i> Wishlist <span style="margin-left:auto" class="wishlist-count-side"><?php echo count($nav_wishlist_ids); ?></span></a>
         <a class="side-link" href="<?= site_url('contact'); ?>"><i class="fa-regular fa-envelope"></i> Support</a>
     </div>
 </aside>
@@ -150,5 +153,28 @@ document.addEventListener('DOMContentLoaded',function(){
  function openSide(){if(sb)sb.classList.add('open');if(ov)ov.classList.add('show');}
  if(bt)bt.addEventListener('click',openSide);if(bc)bc.addEventListener('click',closeSide);if(ov)ov.addEventListener('click',closeSide);
  document.querySelectorAll('.side-link').forEach(x=>x.addEventListener('click',closeSide));
+
+ // Wishlist toggle: works on home/category/search cards without leaving the page.
+ document.addEventListener('click', function(e){
+   const btn=e.target.closest('.wishlist-toggle');
+   if(!btn) return;
+   e.preventDefault(); e.stopPropagation();
+   const productId=btn.getAttribute('data-product-id');
+   if(!productId) return;
+   btn.disabled=true;
+   fetch('<?= site_url('wishlist/toggle'); ?>',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:'product_id='+encodeURIComponent(productId)})
+     .then(r=>r.json()).then(data=>{
+       if(!data.success) throw new Error(data.message||'Wishlist update failed');
+       document.querySelectorAll('.wishlist-toggle[data-product-id="'+productId+'"]').forEach(function(el){
+         el.classList.toggle('is-wishlisted', !!data.added);
+         el.setAttribute('aria-pressed', data.added ? 'true':'false');
+         const icon=el.querySelector('i');
+         if(icon){ icon.classList.toggle('fa-regular', !data.added); icon.classList.toggle('fa-solid', !!data.added); }
+         el.setAttribute('aria-label', data.added ? 'Remove from wishlist' : 'Add to wishlist');
+       });
+       document.querySelectorAll('#wishlistCount,.wishlist-count-side').forEach(function(el){el.textContent=data.wishlist_count;});
+     }).catch(function(err){ alert(err.message||'Could not update wishlist.'); })
+     .finally(function(){btn.disabled=false;});
+ });
 });
 </script>

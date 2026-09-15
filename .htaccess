@@ -1,0 +1,17 @@
+<IfModule mod_authz_core.c>
+    Require all granted
+</IfModule>
+<IfModule mod_access_compat.c>
+    Allow from all
+</IfModule>
+
+DirectoryIndex index.php
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /bookspot_final_full/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>

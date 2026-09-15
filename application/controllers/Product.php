@@ -48,6 +48,11 @@ class Product extends CI_Controller {
             }
         }
         $data['cartStatus'] = $cartStatus;
+        $wish = $this->session->userdata('wishlist_ids');
+        if (!is_array($wish)) $wish = array();
+        $wish = array_flip(array_map('intval', $wish));
+        $data['wishlistStatus'] = $wish;
+        $data['wishlistCount'] = count($wish);
 
         $this->load->view('partials/navbar', $data);
         $this->load->view('product/search_results', $data);
