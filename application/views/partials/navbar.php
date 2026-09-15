@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/bookspot-icons.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/editorial-store.css'); ?>">
 <style>
 :root{--bs-brand:#5b4bdb;--bs-brand-2:#7c6cf3;--bs-ink:#182033;--bs-muted:#6b7280;--bs-line:#e7eaf0;--bs-soft:#f6f7fb;--bs-dark:#111827}
 .book-navbar{position:sticky;top:0;z-index:1500;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bs-line);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}

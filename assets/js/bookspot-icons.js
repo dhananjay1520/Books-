@@ -65,6 +65,14 @@ const paths={
 'wand-magic-sparkles':'<path d="M15 4 20 9M3 21 17 7M5 5v4M3 7h4M19 15v4M17 17h4"/>',
 'sliders':'<path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="11" cy="18" r="2"/>',
 'bolt':'<path d="m13 2-8 12h6l-1 8 8-12h-6z"/>',
+'book-open-reader':'<path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H12v18H7.5A3.5 3.5 0 0 0 4 23zM20 5.5A3.5 3.5 0 0 0 16.5 2H12v18h4.5A3.5 3.5 0 0 1 20 23z"/><path d="M8 6.5h2M14 6.5h2"/>",
+'repeat':'<path d="m17 3 3 3-3 3M20 6H9a5 5 0 0 0-4.5 7"/><path d="m7 21-3-3 3-3M4 18h11a5 5 0 0 0 4.5-7"/>',
+'arrow-left':'<path d="M20 12H5M11 6l-6 6 6 6"/>',
+'bag-shopping':'<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+'cart-shopping':'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2l2.2 11h10.5L20 7H6"/>',
+'edit':'<path d="m4 20 4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z"/><path d="m13.5 7.5 3 3"/>',
+'trash-can':'<path d="M4 7h16M9 7V4h6v3M7 7l1 14h8l1-14M10 11v6M14 11v6"/>',
+'shopping-cart':'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2l2.2 11h10.5L20 7H6"/>',
 };
 function key(el){return [...el.classList].find(c=>c.startsWith('fa-')&&!['fa-solid','fa-regular','fa-brands'].includes(c))?.slice(3)||''}
 function render(){document.querySelectorAll('i.fa-solid,i.fa-regular,i.fab').forEach(el=>{if(el.classList.contains('bs-icon-ready'))return;const k=key(el);const d=paths[k]||paths['circle-check'];el.innerHTML='<svg class="bs-local-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+d+'</svg>';el.classList.add('bs-icon-ready');});}

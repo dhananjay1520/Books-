@@ -31,7 +31,7 @@
 
           <?php foreach ($items as $item): ?>
             <article class="bs2-item">
-              <a class="bs2-cover" href="<?= $item['item_type'] === 'rent' ? site_url('cart') : site_url('product/details/'.(int)$item['product_id']) ?>">
+              <a class="bs2-cover bs2-cover-compact" href="<?= $item['item_type'] === 'rent' ? site_url('cart') : site_url('product/details/'.(int)$item['product_id']) ?>">
                 <img src="<?= book_image_url($item['image']) ?>" alt="<?= html_escape($item['name']) ?>" onerror="this.onerror=null;this.src='<?= base_url('assets/uploads/placeholder-book.svg') ?>';">
               </a>
 
