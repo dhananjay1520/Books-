@@ -8,12 +8,23 @@
     function sync(){
       if(!sidebar) return;
       var opened=sidebar.classList.contains('is-open');
-      if(toggle) { toggle.setAttribute('aria-label', opened?'Close sidebar':'Open sidebar'); toggle.title=opened?'Close sidebar':'Open sidebar'; }
+      if(toggle) {
+        toggle.setAttribute('aria-label', opened?'Close sidebar':'Open sidebar');
+        toggle.title=opened?'Close sidebar':'Open sidebar';
+        toggle.innerHTML=opened ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        if(window.BookSpotIcons) window.BookSpotIcons.render();
+      }
     }
     function close(){ if(!sidebar)return; sidebar.classList.remove('is-open'); if(mobile()){overlay&&overlay.classList.remove('show');body.style.overflow='';} else localStorage.setItem('bookspot-sidebar','closed'); sync(); }
     function open(){ if(!sidebar)return; sidebar.classList.add('is-open'); if(mobile()){overlay&&overlay.classList.add('show');body.style.overflow='hidden';} else localStorage.setItem('bookspot-sidebar','open'); sync(); }
     if(sidebar){
-      if(mobile()) sidebar.classList.remove('is-open'); else if(localStorage.getItem('bookspot-sidebar')==='closed') sidebar.classList.remove('is-open'); else sidebar.classList.add('is-open');
+      if(mobile()) {
+        sidebar.classList.remove('is-open');
+      } else {
+        var saved=localStorage.getItem('bookspot-sidebar');
+        if(saved==='open') sidebar.classList.add('is-open');
+        else sidebar.classList.remove('is-open');
+      }
       sync();
     }
     toggle&&toggle.addEventListener('click',function(){ sidebar.classList.contains('is-open')?close():open(); });

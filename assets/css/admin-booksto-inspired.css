@@ -14,27 +14,37 @@
 }
 body{background:var(--bs-admin-bg)}
 .admin-shell{background:var(--bs-admin-bg)}
-.sidebar{width:244px!important;padding:18px 14px 16px!important;background:#fff!important;border-right:1px solid var(--bs-admin-border)!important;box-shadow:10px 0 30px rgba(29,45,70,.045)!important}
+.sidebar{width:78px!important;padding:18px 14px 16px!important;background:#fff!important;border-right:1px solid var(--bs-admin-border)!important;box-shadow:10px 0 30px rgba(29,45,70,.045)!important}
 .sidebar.is-open{width:244px!important}
-.main,.sidebar.is-open~.main{margin-left:244px!important}
-.brand{height:58px!important;justify-content:flex-start!important;padding:0 10px!important;margin-bottom:8px!important}
+.main{margin-left:78px!important}.sidebar.is-open~.main{margin-left:244px!important}
+.brand{height:58px!important;justify-content:center!important;padding:0 6px!important;margin-bottom:8px!important}
 .brand-mark{width:40px!important;height:40px!important;border-radius:12px!important;background:var(--bs-admin-accent)!important;color:#fff!important;box-shadow:0 8px 18px rgba(22,160,133,.2)!important}
-.brand-full{display:block!important;color:var(--bs-admin-ink)!important;font-size:20px!important;font-weight:800!important}
+.brand-full{display:none!important;color:var(--bs-admin-ink)!important;font-size:20px!important;font-weight:800!important}
 .brand-full span{color:var(--bs-admin-accent)!important}
-.account-block{padding:12px 8px 16px!important;justify-content:flex-start!important;border-bottom:1px solid var(--bs-admin-border)!important}
+.account-block{padding:12px 4px 16px!important;justify-content:center!important;border-bottom:1px solid var(--bs-admin-border)!important}
 .account-avatar{width:42px!important;height:42px!important;background:#f0fbf8!important;color:var(--bs-admin-accent)!important}
 .account-copy{display:block!important}
 .account-name{color:var(--bs-admin-ink)!important}
 .account-email{color:#98a2b3!important}
-.account-badge{display:inline-block!important;background:var(--bs-admin-soft)!important;color:var(--bs-admin-accent-dark)!important;box-shadow:none!important}
-.sidebar-menu-title{display:block!important;color:#a0aaba!important;padding:18px 9px 7px!important}
-.sidebar-links a{height:43px!important;justify-content:flex-start!important;border-radius:10px!important;color:#667085!important;font-weight:650!important}
+.account-badge{display:none!important;background:var(--bs-admin-soft)!important;color:var(--bs-admin-accent-dark)!important;box-shadow:none!important}
+.sidebar-menu-title{display:none!important;color:#a0aaba!important;padding:18px 9px 7px!important}
+.sidebar-links a{height:43px!important;justify-content:center!important;border-radius:10px!important;color:#667085!important;font-weight:650!important}
 .sidebar-links a:hover{background:#f5faf8!important;color:var(--bs-admin-accent-dark)!important}
 .sidebar-links a.active{background:#eaf8f4!important;color:var(--bs-admin-accent-dark)!important;box-shadow:inset 3px 0 0 var(--bs-admin-accent)!important}
 .sidebar-links a.active i{color:var(--bs-admin-accent)!important}
-.sidebar-links a i{font-size:16px!important}
+.sidebar-links a i{font-size:18px!important}
 .sidebar:not(.is-open) .sidebar-links a::after{background:var(--bs-admin-ink)!important}
 .topbar{height:70px!important;padding:0 26px!important;background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--bs-admin-border)!important}
+
+.sidebar.is-open .brand{justify-content:flex-start!important;padding:0 10px!important}
+.sidebar.is-open .brand-full{display:block!important}
+.sidebar.is-open .account-block{justify-content:flex-start!important;padding:12px 8px 16px!important}
+.sidebar.is-open .account-copy{display:block!important}
+.sidebar.is-open .account-badge{display:inline-block!important}
+.sidebar.is-open .sidebar-menu-title{display:block!important}
+.sidebar.is-open .sidebar-links a{justify-content:flex-start!important}
+.sidebar.is-open .sidebar-links a span{display:block!important}
+.sidebar.is-open .sidebar-links a i{font-size:16px!important}
 .sidebar-toggle,.tool-btn,.theme-toggle,.admin-user-btn{background:#fff!important;border-color:var(--bs-admin-border)!important;box-shadow:0 3px 10px rgba(25,35,50,.035)!important}
 .sidebar-toggle:hover,.tool-btn:hover,.theme-toggle:hover,.admin-user-btn:hover{border-color:#cfe9e2!important;background:#f9fdfc!important;color:var(--bs-admin-accent-dark)!important}
 .top-title{font-size:18px!important;font-weight:800!important;color:var(--bs-admin-ink)!important}

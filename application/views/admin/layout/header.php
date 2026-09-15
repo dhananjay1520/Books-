@@ -224,7 +224,6 @@ a{text-decoration:none;color:inherit}.admin-shell{min-height:100vh}
     </div>
     <div class="position-relative">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><i class="fa-solid fa-moon"></i><span class="theme-toggle-label">Dark</span></button>
-div>
     </div>
     <div class="admin-account">
       <button class="admin-user-btn" id="adminUserBtn" type="button">
